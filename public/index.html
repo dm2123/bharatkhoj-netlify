@@ -36,172 +36,321 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: #fff; color: #202
 .card-actions { display: flex; gap: 15px; padding: 10px 15px; border-top: 1px solid #f0f0f0; }
 .card-actions button { background: none; border: none; cursor: pointer; font-size: 14px; color: #70757a; }
 .results { max-width: 700px; margin: 20px auto; padding: 0 20px; }
-.tabs { display: flex; gap: 20px; border-bottom: 1px solid #dfe1e5; margin-bottom: 20px; padding: 0 20px; }
-.tabs button { background: none; border: none; padding: 12px 0; cursor: pointer; font-size: 14px; color: #70757a; border-bottom: 3px solid transparent; }
+.tabs { display: flex; gap: 20px; border-bottom: 1px solid #dfe1e5; margin-bottom: 20px; padding: 0 20px; overflow-x: auto; }
+.tabs button { background: none; border: none; padding: 12px 0; cursor: pointer; font-size: 14px; color: #70757a; border-bottom: 3px solid transparent; white-space: nowrap; }
 .tabs button.active { color: #1a73e8; border-bottom-color: #1a73e8; }
 .result { margin-bottom: 28px; max-width: 600px; }
 .result-header { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
-.result-favicon { width: 20px; height: 20px; border-radius: 50%; background: #f1f3f4; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+.result-favicon { width: 20px; height: 20px; border-radius: 50%; background: #f1f3f4; display: flex; align-items: center; justify-content: center; font-size: 12px; object-fit: cover; }
 .result-url { font-size: 13px; color: #202124; }
 .result-display-url { font-size: 12px; color: #5f6368; }
 .result-title { font-size: 20px; color: #1a0dab; text-decoration: none; line-height: 1.3; display: block; margin: 4px 0; font-weight: 400; }
 .result-title:hover { text-decoration: underline; }
 .result-snippet { font-size: 14px; color: #4d5156; line-height: 1.58; }
-.knowledge-panel { background: #fff; border: 1px solid #dfe1e5; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
-.knowledge-panel h3 { font-size: 22px; margin-bottom: 10px; }
-.knowledge-panel img { width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
-.knowledge-facts { margin-top: 15px; }
-.knowledge-facts div { padding: 8px 0; border-top: 1px solid #f0f0f0; font-size: 14px; }
-.knowledge-facts span { color: #70757a; }
+/* Knowledge panel with photo carousel */
+.knowledge-panel { background: #fff; border: 1px solid #dfe1e5; border-radius: 12px; padding: 0; margin-bottom: 24px; overflow: hidden; }
+.kp-photos { display: flex; gap: 4px; overflow-x: auto; padding: 0; scrollbar-width: thin; }
+.kp-photos img { height: 180px; min-width: 140px; object-fit: cover; cursor: pointer; flex-shrink: 0; }
+.kp-photos img:first-child { min-width: 220px; }
+.kp-body { padding: 20px; }
+.kp-body h3 { font-size: 24px; margin-bottom: 4px; }
+.kp-sub { font-size: 13px; color: #70757a; margin-bottom: 10px; }
+.kp-desc { font-size: 14px; color: #4d5156; line-height: 1.6; margin-bottom: 10px; }
+.kp-facts { margin-top: 12px; }
+.kp-facts div { padding: 8px 0; border-top: 1px solid #f0f0f0; font-size: 14px; }
+.kp-facts span { color: #70757a; }
+.kp-links { margin-top: 12px; display: flex; gap: 12px; flex-wrap: wrap; }
+.kp-links a { font-size: 13px; color: #1a73e8; text-decoration: none; border: 1px solid #dfe1e5; padding: 6px 14px; border-radius: 16px; }
 .results-header { font-size: 13px; color: #70757a; margin-bottom: 20px; }
-.pagination { display: flex; gap: 10px; justify-content: center; margin: 30px 0; }
-.pagination button { padding: 8px 16px; border: 1px solid #dfe1e5; background: #fff; border-radius: 4px; cursor: pointer; }
-.pagination button:hover { background: #f8f9fa; }
-.pagination button.active { background: #1a73e8; color: #fff; border-color: #1a73e8; }
-.ai-answer { background: #f8f9fa; border-radius: 12px; padding: 20px; margin-bottom: 20px; line-height: 1.6; }
+/* Image grid */
+.img-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; padding: 0 16px; max-width: 900px; margin: 0 auto; }
+.img-item { border-radius: 8px; overflow: hidden; cursor: pointer; aspect-ratio: 1; background: #f1f3f4; }
+.img-item img { width: 100%; height: 100%; object-fit: cover; }
+.img-item img:hover { opacity: 0.9; }
+/* Video cards */
+.video-card { display: flex; gap: 12px; margin-bottom: 20px; cursor: pointer; }
+.video-thumb { width: 180px; height: 110px; border-radius: 8px; object-fit: cover; flex-shrink: 0; background: #f1f3f4; }
+.video-info { flex: 1; }
+.video-title { font-size: 16px; color: #1a0dab; margin-bottom: 4px; line-height: 1.3; }
+.video-meta { font-size: 12px; color: #70757a; }
+/* AI Mode */
+.ai-answer-card { background: #f8f9fa; border-radius: 16px; padding: 24px; margin-bottom: 16px; line-height: 1.7; font-size: 15px; }
+.ai-answer-card h3 { margin-bottom: 14px; font-size: 18px; }
+.ai-answer-card strong { font-weight: 600; }
+.ai-answer-card sup.cite { background: #e8f0fe; color: #1a73e8; border-radius: 4px; padding: 1px 5px; font-size: 11px; margin: 0 2px; cursor: pointer; text-decoration: none; display: inline-block; }
+.ai-answer-card sup.cite a { color: #1a73e8; text-decoration: none; }
+.sources-section { margin-top: 8px; margin-bottom: 24px; }
+.sources-section h4 { font-size: 16px; margin-bottom: 12px; }
+.source-card { display: flex; gap: 12px; padding: 12px; border: 1px solid #dfe1e5; border-radius: 12px; margin-bottom: 10px; cursor: pointer; }
+.source-card:hover { background: #f8f9fa; }
+.source-num { background: #1a73e8; color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+.source-title { font-size: 14px; color: #1a0dab; margin-bottom: 2px; }
+.source-domain { font-size: 12px; color: #5f6368; }
+.source-snippet { font-size: 13px; color: #4d5156; margin-top: 4px; line-height: 1.5; }
 .loading { text-align: center; padding: 40px; color: #70757a; }
+.error-box { text-align: center; padding: 40px 20px; color: #70757a; }
+.error-box p { margin-bottom: 12px; }
 </style>
 </head>
 <body>
 <div id="home">
-<div class="header">
-<div class="logo"><span>B</span><span>h</span><span>a</span><span>r</span><span>a</span><span>t</span><span>K</span><span>h</span><span>o</span><span>j</span></div>
-<div class="tagline">India-first search. Private by design.</div>
-<div class="search-box">
-<input type="text" id="searchInput" placeholder="Search BharatKhoj" onkeypress="if(event.key==='Enter')doSearch()">
-<button class="search-btn" onclick="doSearch()">&#128269;</button>
+  <div class="header">
+    <div class="logo"><span>B</span><span>h</span><span>a</span><span>r</span><span>a</span><span>t</span><span>K</span><span>h</span><span>o</span><span>j</span></div>
+    <div class="tagline">India-first search. Private by design.</div>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search BharatKhoj" onkeypress="if(event.key==='Enter')doSearch()">
+      <button class="search-btn" onclick="doSearch()">🔍</button>
+    </div>
+    <div class="buttons">
+      <button onclick="doSearch()">BharatKhoj Search</button>
+      <button onclick="doAISearch()">AI Mode</button>
+    </div>
+    <div style="margin-top:10px;"><a href="#" onclick="feelingLucky();return false;" style="color:#1a73e8;font-size:13px;">I'm Feeling Lucky</a></div>
+  </div>
+  <div class="widgets" id="widgets"><div class="loading">Loading live data...</div></div>
+  <div class="discover">
+    <h2>Discover</h2>
+    <div id="discoverFeed"><div class="loading">Loading stories...</div></div>
+  </div>
 </div>
-<div class="buttons">
-<button onclick="doSearch()">BharatKhoj Search</button>
-<button onclick="doAISearch()">AI Mode</button>
-</div>
-<div style="margin-top:10px;"><a href="#" onclick="feelingLucky();return false;" style="color:#1a73e8;font-size:13px;">I'm Feeling Lucky</a></div>
-</div>
-<div class="widgets" id="widgets"><div class="loading">Loading live data...</div></div>
-<div class="discover">
-<h2>Discover</h2>
-<div id="discoverFeed"><div class="loading">Loading stories...</div></div>
-</div>
-</div>
+
 <div id="results" style="display:none;">
-<div class="header" style="padding:10px;">
-<div style="display:flex;align-items:center;max-width:700px;margin:0 auto;gap:15px;">
-<div class="logo" style="font-size:28px;margin:0;"><span>B</span><span>h</span><span>a</span><span>r</span><span>a</span><span>t</span><span>K</span><span>h</span><span>o</span><span>j</span></div>
-<div class="search-box" style="flex:1;margin:0;">
-<input type="text" id="searchInput2" onkeypress="if(event.key==='Enter')doSearch2()">
-<button class="search-btn" onclick="doSearch2()">&#128269;</button>
+  <div class="header" style="padding:10px;">
+    <div style="display:flex;align-items:center;max-width:700px;margin:0 auto;gap:15px;">
+      <div class="logo" style="font-size:28px;margin:0;"><span>B</span><span>h</span><span>a</span><span>r</span><span>a</span><span>t</span><span>K</span><span>h</span><span>o</span><span>j</span></div>
+      <div class="search-box" style="flex:1;margin:0;">
+        <input type="text" id="searchInput2" onkeypress="if(event.key==='Enter')doSearch2()">
+        <button class="search-btn" onclick="doSearch2()">🔍</button>
+      </div>
+    </div>
+  </div>
+  <div class="tabs">
+    <button onclick="switchTab('ai')">AI Mode</button>
+    <button class="active" onclick="switchTab('all')">All</button>
+    <button onclick="switchTab('images')">Images</button>
+    <button onclick="switchTab('news')">News</button>
+    <button onclick="switchTab('videos')">Videos</button>
+  </div>
+  <div class="results" id="resultsList" style="max-width:900px;"></div>
+  <div style="text-align:center;margin:30px;"><a href="#" onclick="goHome();return false;" style="color:#1a73e8;">← Back to home</a></div>
 </div>
-</div>
-</div>
-<div class="tabs">
-<button onclick="switchTab('ai')">AI Mode</button>
-<button class="active" onclick="switchTab('all')">All</button>
-<button onclick="switchTab('images')">Images</button>
-<button onclick="switchTab('news')">News</button>
-<button onclick="switchTab('videos')">Videos</button>
-<button onclick="switchTab('adult')" style="color:#c5221f;">&#128286; Adult</button>
-</div>
-<div class="results" id="resultsList"></div>
-<div style="text-align:center;margin:30px;"><a href="#" onclick="goHome();return false;" style="color:#1a73e8;">&larr; Back to home</a></div>
-</div>
+
 <script>
-let currentQuery = '', currentTab = 'all', discoverPage = 1, loadingDiscover = false, adultVerified = false;
-function verifyAdult() {
-if (adultVerified) return true;
-const age = confirm("\ud83d\udd1e ADULT CONTENT (18+)\n\nKya aap 18 saal ya usse zyada ke hain?\n\nOK = Haan, 18+ hoon\nCancel = Nahi");
-if (age) { adultVerified = true; return true; }
-return false;
+let currentQuery = '', currentTab = 'all', discoverPage = 1, loadingDiscover = false;
+
+function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// Render markdown: **bold** -> <strong>, [n] -> superscript citation link
+function renderMarkdown(text, sources) {
+  let html = esc(text);
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/\*([^*]+?)\*/g, '<em>$1</em>');
+  html = html.replace(/\[(\d+)\]/g, (m, n) => {
+    const src = (sources||[]).find(s => String(s.n) === n);
+    const url = src ? src.url : '#';
+    return `<sup class="cite"><a href="${esc(url)}" target="_blank">${n}</a></sup>`;
+  });
+  html = html.replace(/\n\n+/g, '</p><p>').replace(/\n/g, '<br>');
+  return '<p>' + html + '</p>';
 }
+
 async function loadWidgets() {
-try {
-const r = await fetch('/.netlify/functions/discover?page=1');
-const d = await r.json();
-let html = '';
-if (d.weather) html += '<div class="widget"><div class="label">Delhi Weather</div><div class="value">' + d.weather.temp + '&#176;C</div><div style="font-size:12px;color:#70757a">' + (d.weather.condition||'') + '</div></div>';
-document.getElementById('widgets').innerHTML = html || '<div style="color:#70757a">Live data loading...</div>';
-} catch(e) { document.getElementById('widgets').innerHTML = ''; }
+  try {
+    const r = await fetch('/.netlify/functions/discover?page=1');
+    const d = await r.json();
+    let html = '';
+    if (d.weather) {
+      const w = d.weather;
+      html += `<div class="widget"><div class="label">🌤️ ${esc(w.location||'Delhi')}</div><div class="value">${w.temp_c}°C</div><div style="font-size:12px;color:#70757a">${esc(w.condition||'')} ${w.humidity ? '• 💧'+w.humidity+'%' : ''}</div></div>`;
+    }
+    if (d.total_news) html += `<div class="widget"><div class="label">📰 Fresh Stories</div><div class="value">${d.total_news}</div><div style="font-size:12px;color:#70757a">in Discover</div></div>`;
+    document.getElementById('widgets').innerHTML = html || '';
+  } catch(e) { document.getElementById('widgets').innerHTML = ''; }
 }
+
 async function loadDiscover() {
-if (loadingDiscover) return; loadingDiscover = true;
-try {
-const r = await fetch('/.netlify/functions/discover?page=' + discoverPage);
-const d = await r.json();
-const feed = document.getElementById('discoverFeed');
-if (discoverPage === 1) feed.innerHTML = '';
-(d.news||[]).forEach(s => {
-const img = s.image ? '<img src="' + s.image + '" loading="lazy" onerror="this.style.display=\'none\'">' : '';
-const time = s.published ? new Date(s.published).toLocaleString() : '';
-feed.innerHTML += '<div class="card" onclick="window.open(\'' + s.url + '\',\'_blank\')">' + img + '<div class="card-body"><div class="card-title">' + s.title + '</div><div class="card-meta">' + (s.source||'') + ' &bull; ' + time + '</div></div><div class="card-actions"><button>&#128077; Like</button><button>&#8599;&#65039; Share</button></div></div>';
-});
-discoverPage++;
-if (d.has_more) loadingDiscover = false;
-} catch(e) { document.getElementById('discoverFeed').innerHTML = '<div class="loading">Failed to load stories</div>'; }
+  if (loadingDiscover) return; loadingDiscover = true;
+  try {
+    const r = await fetch(`/.netlify/functions/discover?page=${discoverPage}`);
+    const d = await r.json();
+    const feed = document.getElementById('discoverFeed');
+    if (discoverPage === 1) feed.innerHTML = '';
+    (d.news||[]).forEach(s => {
+      const img = s.image ? `<img src="${esc(s.image)}" loading="lazy" onerror="this.style.display='none'">` : '';
+      const time = s.published ? new Date(s.published).toLocaleString() : '';
+      feed.innerHTML += `<div class="card" onclick="window.open('${esc(s.url)}','_blank')">${img}<div class="card-body"><div class="card-title">${esc(s.title)}</div><div class="card-meta">${esc(s.source||'')} • ${time}</div></div><div class="card-actions"><button>👍 Like</button><button>↗️ Share</button></div></div>`;
+    });
+    discoverPage++;
+    loadingDiscover = !(d.has_more);
+  } catch(e) {
+    if (discoverPage === 1) document.getElementById('discoverFeed').innerHTML = '<div class="error-box"><p>Stories load nahi ho payi.</p></div>';
+    loadingDiscover = true;
+  }
 }
+
 window.onscroll = () => {
-if (document.getElementById('home').style.display !== 'none' && !loadingDiscover) {
-if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) loadDiscover();
-}
+  if (document.getElementById('home').style.display !== 'none' && !loadingDiscover) {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) loadDiscover();
+  }
 };
+
 function doSearch() { const q = document.getElementById('searchInput').value.trim(); if (q) showResults(q, 'all'); }
 function doSearch2() { const q = document.getElementById('searchInput2').value.trim(); if (q) showResults(q, currentTab); }
 function doAISearch() { const q = document.getElementById('searchInput').value.trim(); if (q) showResults(q, 'ai'); }
 function feelingLucky() { const q = document.getElementById('searchInput').value.trim() || 'India'; showResults(q, 'all'); }
 function goHome() { document.getElementById('results').style.display='none'; document.getElementById('home').style.display='block'; }
 function switchTab(t) {
-if (t === 'adult' && !verifyAdult()) return;
-currentTab = t;
-document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
-event.target.classList.add('active');
-if(currentQuery) showResults(currentQuery, t);
+  currentTab = t;
+  document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  if(currentQuery) showResults(currentQuery, t);
 }
+
+// Knowledge panel with MULTIPLE photos (Google-like carousel)
+async function buildKnowledgePanel(q, kp) {
+  let photos = [];
+  if (kp.image) photos.push(kp.image);
+  try {
+    const r = await fetch(`/.netlify/functions/search?q=${encodeURIComponent(q)}&type=images&limit=6`);
+    const d = await r.json();
+    (d.results||[]).forEach(im => {
+      const u = im.thumb_url || im.thumbnail || im.image_url;
+      if (u && !photos.includes(u)) photos.push(u);
+    });
+  } catch(e) {}
+  photos = photos.slice(0, 8);
+  let html = `<div class="knowledge-panel">`;
+  if (photos.length) {
+    html += `<div class="kp-photos">` + photos.map(p =>
+      `<img src="${esc(p)}" loading="lazy" onerror="this.style.display='none'" onclick="window.open('${esc(p)}','_blank')">`
+    ).join('') + `</div>`;
+  }
+  html += `<div class="kp-body"><h3>${esc(kp.name||q)}</h3>`;
+  if (kp.name_hi) html += `<div class="kp-sub">${esc(kp.name_hi)}</div>`;
+  if (kp.description) html += `<div class="kp-desc">${esc(kp.description.substring(0,400))}${kp.description.length>400?'...':''}</div>`;
+  if (kp.facts && kp.facts.length) {
+    html += `<div class="kp-facts">` + kp.facts.slice(0,6).map(f=>`<div><span>${esc(f.label)}:</span> <strong>${esc(f.value)}</strong></div>`).join('') + `</div>`;
+  }
+  html += `<div class="kp-links">`;
+  if (kp.wikipedia) html += `<a href="${esc(kp.wikipedia)}" target="_blank">📖 Wikipedia</a>`;
+  if (kp.official_website) html += `<a href="${esc(kp.official_website)}" target="_blank">🌐 Official site</a>`;
+  html += `</div></div></div>`;
+  return html;
+}
+
+function webResultsHtml(d, q) {
+  let html = `<div class="results-header">About ${(d.total||(d.results||[]).length).toLocaleString()} results (${((d.took_ms||500)/1000).toFixed(2)} seconds)</div>`;
+  html += (d.results||[]).map(res => {
+    const favicon = res.favicon
+      ? `<img src="${esc(res.favicon)}" class="result-favicon" onerror="this.style.display='none'">`
+      : `<div class="result-favicon">🌐</div>`;
+    return `<div class="result">
+      <div class="result-header">${favicon}<div><div class="result-url">${esc(res.site_name||res.display_url||'')}</div><div class="result-display-url">${esc(res.display_url||res.url)}</div></div></div>
+      <a class="result-title" href="${esc(res.url)}" target="_blank">${esc(res.title)}</a>
+      <div class="result-snippet">${esc(res.snippet||'')}</div>
+    </div>`;
+  }).join('');
+  return html;
+}
+
 async function showResults(q, tab) {
-currentQuery = q; currentTab = tab;
-document.getElementById('home').style.display='none';
-document.getElementById('results').style.display='block';
-document.getElementById('searchInput2').value = q;
-const list = document.getElementById('resultsList');
-list.innerHTML = '<div class="loading">Searching...</div>';
-try {
-if (tab === 'ai') {
-const r = await fetch('/.netlify/functions/ai?q=' + encodeURIComponent(q));
-const d = await r.json();
-let cites = '';
-if (d.citations && d.citations.length) {
-cites = '<div style="margin-top:15px;"><strong style="font-size:14px;">Sources:</strong><div style="margin-top:8px;">' +
-d.citations.map(c=>'<div style="margin:5px 0;"><a href="' + c.url + '" target="_blank" style="color:#1a73e8;font-size:13px;">' + (c.title||c.url) + '</a></div>').join('') + '</div></div>';
+  currentQuery = q; currentTab = tab;
+  document.getElementById('home').style.display='none';
+  document.getElementById('results').style.display='block';
+  document.getElementById('searchInput2').value = q;
+  const list = document.getElementById('resultsList');
+  list.innerHTML = '<div class="loading">Searching...</div>';
+  list.style.maxWidth = (tab==='images') ? '1000px' : '700px';
+
+  try {
+    if (tab === 'ai') {
+      const r = await fetch(`/.netlify/functions/ai?q=${encodeURIComponent(q)}`);
+      const d = await r.json();
+      if (d.error || !d.answer) {
+        list.innerHTML = `<div class="error-box"><p>😔 AI jawab nahi de paya.</p><p style="font-size:13px;">${esc(d.error||'Dobara try karein.')}</p></div>`;
+        return;
+      }
+      const sources = d.sources || d.citations || [];
+      let html = `<div class="ai-answer-card"><h3>🤖 AI Answer</h3>${renderMarkdown(d.answer, sources)}`;
+      if (d.took_ms) html += `<div style="font-size:12px;color:#70757a;margin-top:12px;">${(d.took_ms/1000).toFixed(1)}s • ${d.grounded ? 'Grounded' : ''}</div>`;
+      html += `</div>`;
+      if (sources.length) {
+        html += `<div class="sources-section"><h4>📚 Sources</h4>` + sources.map(s =>
+          `<div class="source-card" onclick="window.open('${esc(s.url)}','_blank')">
+            <div class="source-num">${s.n}</div>
+            <div><div class="source-title">${esc(s.title||s.url)}</div>
+            <div class="source-domain">${esc(s.domain||'')}</div>
+            ${s.snippet ? `<div class="source-snippet">${esc(s.snippet.substring(0,160))}...</div>` : ''}</div>
+          </div>`
+        ).join('') + `</div>`;
+      }
+      list.innerHTML = html;
+
+    } else if (tab === 'images') {
+      const r = await fetch(`/.netlify/functions/search?q=${encodeURIComponent(q)}&type=images&limit=30`);
+      const d = await r.json();
+      const imgs = d.results || [];
+      if (!imgs.length) { list.innerHTML = `<div class="error-box"><p>No images found for "${esc(q)}"</p></div>`; return; }
+      list.innerHTML = `<div class="results-header">About ${d.total||imgs.length} images</div><div class="img-grid">` +
+        imgs.map(im => {
+          const u = im.thumb_url || im.thumbnail || im.image_url;
+          return `<div class="img-item" title="${esc(im.title||'')}" onclick="window.open('${esc(im.image_url||u)}','_blank')"><img src="${esc(u)}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`;
+        }).join('') + `</div>`;
+
+    } else if (tab === 'videos') {
+      const r = await fetch(`/.netlify/functions/search?q=${encodeURIComponent(q)}&type=videos&limit=20`);
+      const d = await r.json();
+      const vids = d.results || [];
+      if (!vids.length) { list.innerHTML = `<div class="error-box"><p>No videos found for "${esc(q)}"</p></div>`; return; }
+      list.innerHTML = `<div class="results-header">About ${d.total||vids.length} videos</div>` +
+        vids.map(v => `<div class="video-card" onclick="window.open('${esc(v.video_url||v.url)}','_blank')">
+          ${v.thumbnail||v.thumb_url ? `<img class="video-thumb" src="${esc(v.thumbnail||v.thumb_url)}" loading="lazy" onerror="this.style.display='none'">` : ''}
+          <div class="video-info"><div class="video-title">${esc(v.title)}</div>
+          <div class="video-meta">${esc(v.source||v.display_url||'')} ${v.published ? '• '+esc(v.published) : ''}</div>
+          ${v.snippet ? `<div class="result-snippet" style="margin-top:6px;">${esc(v.snippet.substring(0,140))}...</div>` : ''}</div>
+        </div>`).join('');
+
+    } else if (tab === 'news') {
+      let items = [];
+      try {
+        const r = await fetch(`/.netlify/functions/search?q=${encodeURIComponent(q)}&type=news&limit=20`);
+        const d = await r.json();
+        if (!d.error) items = d.results || [];
+      } catch(e) {}
+      if (!items.length) {
+        // Fallback: Discover se matching news
+        try {
+          const r2 = await fetch(`/.netlify/functions/discover?page=1`);
+          const d2 = await r2.json();
+          const ql = q.toLowerCase();
+          items = (d2.news||[]).filter(n => (n.title||'').toLowerCase().includes(ql.split(' ')[0]));
+          if (!items.length) items = (d2.news||[]).slice(0, 10);
+          items = items.map(n => ({ title: n.title, url: n.url, display_url: n.source, snippet: '', image: n.image, published: n.published, source: n.source }));
+        } catch(e2) {}
+      }
+      if (!items.length) { list.innerHTML = `<div class="error-box"><p>No news found for "${esc(q)}"</p></div>`; return; }
+      list.innerHTML = `<div class="results-header">${items.length} news stories</div>` +
+        items.map(n => `<div class="result">
+          <div class="result-header"><div><div class="result-url">${esc(n.source||n.display_url||'')}</div><div class="result-display-url">${n.published ? esc(String(n.published).substring(0,10)) : ''}</div></div></div>
+          <a class="result-title" href="${esc(n.url)}" target="_blank">${esc(n.title)}</a>
+          ${n.snippet ? `<div class="result-snippet">${esc(n.snippet.substring(0,180))}...</div>` : ''}
+        </div>`).join('');
+
+    } else {
+      // ALL tab
+      const r = await fetch(`/.netlify/functions/search?q=${encodeURIComponent(q)}&limit=10`);
+      const d = await r.json();
+      if (!d.results || !d.results.length) { list.innerHTML = `<div class="error-box"><p>No results found for "${esc(q)}"</p></div>`; return; }
+      let html = '';
+      if (d.knowledge_panel) html += await buildKnowledgePanel(q, d.knowledge_panel);
+      html += webResultsHtml(d, q);
+      list.innerHTML = html;
+    }
+  } catch(e) {
+    list.innerHTML = `<div class="error-box"><p>Search failed. Dobara try karein.</p><p style="font-size:12px;">${esc(e.message)}</p></div>`;
+  }
 }
-list.innerHTML = '<div class="ai-answer"><h3 style="margin-bottom:12px;">&#129302; AI Answer</h3><div style="line-height:1.7;">' + (d.answer||d.text||'No answer available') + '</div>' + cites + '</div>';
-} else if (tab === 'adult') {
-if (!adultVerified) { list.innerHTML = '<div class="loading">18+ verification required</div>'; return; }
-const r = await fetch('/.netlify/functions/adult-search?q=' + encodeURIComponent(q) + '&limit=10');
-const d = await r.json();
-if (!d.results || d.results.length === 0) { list.innerHTML = '<div class="loading">No adult results found</div>'; return; }
-list.innerHTML = '<div class="results-header" style="color:#c5221f;">&#128286; Adult results for "' + q + '"</div>' +
-d.results.map(res => '<div class="result"><div class="result-url">' + (res.display_url||res.url) + '</div><a class="result-title" href="' + res.url + '" target="_blank">' + res.title + '</a><div class="result-snippet">' + (res.snippet||'') + '</div></div>').join('');
-} else {
-const r = await fetch('/.netlify/functions/search?q=' + encodeURIComponent(q) + '&limit=10');
-const d = await r.json();
-if (!d.results || d.results.length === 0) { list.innerHTML = '<div class="loading">No results found</div>'; return; }
-let html = '<div class="results-header">About ' + (d.total||d.results.length).toLocaleString() + ' results (' + (((d.took_ms||500)/1000).toFixed(2)) + ' seconds)</div>';
-if (d.knowledge_panel) {
-const kp = d.knowledge_panel;
-html += '<div class="knowledge-panel">';
-if (kp.image) html += '<img src="' + kp.image + '" alt="' + kp.name + '">';
-html += '<h3>' + (kp.name||'') + '</h3>';
-if (kp.description) html += '<p style="font-size:14px;color:#4d5156;line-height:1.6;">' + kp.description.substring(0,300) + '...</p>';
-if (kp.facts && kp.facts.length) {
-html += '<div class="knowledge-facts">' + kp.facts.slice(0,5).map(f=>'<div><span>' + f.label + ':</span> <strong>' + f.value + '</strong></div>').join('') + '</div>';
-}
-html += '</div>';
-}
-html += d.results.map(res => {
-const favicon = res.favicon ? '<img src="' + res.favicon + '" class="result-favicon" onerror="this.style.display=\'none\'">' : '<div class="result-favicon">&#127760;</div>';
-return '<div class="result"><div class="result-header">' + favicon + '<div><div class="result-url">' + (res.site_name||res.display_url||'') + '</div><div class="result-display-url">' + (res.display_url||res.url) + '</div></div></div><a class="result-title" href="' + res.url + '" target="_blank">' + res.title + '</a><div class="result-snippet">' + (res.snippet||'') + '</div></div>';
-}).join('');
-list.innerHTML = html;
-}
-} catch(e) { list.innerHTML = '<div class="loading">Search failed. Try again.</div>'; }
-}
+
 loadWidgets(); loadDiscover();
 </script>
 </body>
