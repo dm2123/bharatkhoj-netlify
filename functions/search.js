@@ -10,7 +10,7 @@ exports.handler = async (event) => {
   }
   
   try {
-    const url = `https://bharatkhoj-backend.onrender.com/api/search?q=${encodeURIComponent(q)}&limit=${limit}&type=${encodeURIComponent(type)}&page=${encodeURIComponent(page)}`;
+    const url = `https://recipient-void-grill-staff.trycloudflare.com/api/search?q=${encodeURIComponent(q)}&limit=${limit}&type=${encodeURIComponent(type)}&page=${encodeURIComponent(page)}`;
     const resp = await fetch(url);
     const data = await resp.json();
     
