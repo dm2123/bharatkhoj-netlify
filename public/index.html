@@ -3,351 +3,413 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BharatKhoj - India-first Search</title>
+<title>BharatKhoj</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Segoe UI', Arial, sans-serif; background: #fff; color: #202124; }
-.header { padding: 20px; text-align: center; }
-.logo { font-size: 48px; font-weight: bold; margin: 40px 0 10px; }
-.logo span:nth-child(1) { color: #4285F4; } .logo span:nth-child(2) { color: #EA4335; }
-.logo span:nth-child(3) { color: #FBBC05; } .logo span:nth-child(4) { color: #4285F4; }
-.logo span:nth-child(5) { color: #34A853; } .logo span:nth-child(6) { color: #EA4335; }
-.logo span:nth-child(7) { color: #4285F4; } .logo span:nth-child(8) { color: #FBBC05; }
-.logo span:nth-child(9) { color: #34A853; } .logo span:nth-child(10) { color: #EA4335; }
-.tagline { color: #70757a; margin-bottom: 30px; font-size: 16px; }
-.search-box { max-width: 584px; margin: 0 auto; position: relative; }
-.search-box input { width: 100%; padding: 14px 50px 14px 20px; font-size: 16px; border: 1px solid #dfe1e5; border-radius: 24px; outline: none; }
-.search-box input:hover, .search-box input:focus { box-shadow: 0 1px 6px rgba(32,33,36,.28); border-color: transparent; }
-.search-btn { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 20px; }
-.buttons { margin: 25px 0; }
-.buttons button { background: #f8f9fa; border: 1px solid #f8f9fa; padding: 10px 20px; margin: 0 5px; border-radius: 4px; cursor: pointer; font-size: 14px; }
-.buttons button:hover { border-color: #dadce0; box-shadow: 0 1px 1px rgba(0,0,0,.1); }
-.widgets { display: flex; gap: 15px; justify-content: center; margin: 30px 0; flex-wrap: wrap; }
-.widget { background: #f8f9fa; border-radius: 12px; padding: 15px 20px; min-width: 150px; text-align: center; }
-.widget .label { font-size: 12px; color: #70757a; } .widget .value { font-size: 20px; font-weight: bold; margin-top: 5px; }
-.discover { max-width: 800px; margin: 40px auto; padding: 0 20px; }
-.discover h2 { font-size: 22px; margin-bottom: 20px; }
-.card { background: #fff; border: 1px solid #dfe1e5; border-radius: 12px; margin-bottom: 20px; overflow: hidden; cursor: pointer; }
-.card:hover { box-shadow: 0 2px 8px rgba(0,0,0,.1); }
-.card img { width: 100%; height: 250px; object-fit: cover; }
-.card-body { padding: 15px; }
-.card-title { font-size: 18px; font-weight: 500; margin-bottom: 8px; line-height: 1.4; }
-.card-meta { font-size: 13px; color: #70757a; }
-.card-actions { display: flex; gap: 15px; padding: 10px 15px; border-top: 1px solid #f0f0f0; }
-.card-actions button { background: none; border: none; cursor: pointer; font-size: 14px; color: #70757a; }
-.results { max-width: 700px; margin: 20px auto; padding: 0 20px; }
-.tabs { display: flex; gap: 20px; border-bottom: 1px solid #dfe1e5; margin-bottom: 20px; padding: 0 20px; overflow-x: auto; }
-.tabs button { background: none; border: none; padding: 12px 0; cursor: pointer; font-size: 14px; color: #70757a; border-bottom: 3px solid transparent; white-space: nowrap; }
+body { font-family: Arial, sans-serif; background: #fff; color: #202124; font-size: 14px; }
+a { text-decoration: none; }
+
+/* ===== HOME ===== */
+.home-header { padding: 20px; text-align: center; }
+.logo-big { font-size: 52px; font-weight: 400; margin: 60px 0 8px; letter-spacing: -2px; }
+.logo-big span:nth-child(1), .logo-sm span:nth-child(1) { color: #4285F4; }
+.logo-big span:nth-child(2), .logo-sm span:nth-child(2) { color: #EA4335; }
+.logo-big span:nth-child(3), .logo-sm span:nth-child(3) { color: #FBBC05; }
+.logo-big span:nth-child(4), .logo-sm span:nth-child(4) { color: #4285F4; }
+.logo-big span:nth-child(5), .logo-sm span:nth-child(5) { color: #34A853; }
+.logo-big span:nth-child(6), .logo-sm span:nth-child(6) { color: #EA4335; }
+.logo-big span:nth-child(7), .logo-sm span:nth-child(7) { color: #4285F4; }
+.logo-big span:nth-child(8), .logo-sm span:nth-child(8) { color: #FBBC05; }
+.logo-big span:nth-child(9), .logo-sm span:nth-child(9) { color: #34A853; }
+.logo-big span:nth-child(10), .logo-sm span:nth-child(10) { color: #EA4335; }
+.tagline { color: #70757a; margin-bottom: 28px; font-size: 15px; }
+.search-wrap { max-width: 584px; margin: 0 auto; position: relative; }
+.search-wrap input { width: 100%; padding: 13px 90px 13px 22px; font-size: 16px; border: 1px solid #dfe1e5; border-radius: 24px; outline: none; }
+.search-wrap input:hover { box-shadow: 0 1px 6px rgba(32,33,36,.28); }
+.search-wrap input:focus { box-shadow: 0 1px 6px rgba(32,33,36,.28); }
+.sicons { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); display: flex; gap: 12px; align-items: center; }
+.sicons button { background: none; border: none; cursor: pointer; font-size: 18px; }
+.home-btns { margin: 28px 0 12px; }
+.home-btns button { background: #f8f9fa; border: 1px solid #f8f9fa; padding: 10px 18px; margin: 0 6px; border-radius: 4px; cursor: pointer; font-size: 14px; color: #3c4043; }
+.home-btns button:hover { box-shadow: 0 1px 1px rgba(0,0,0,.1); border-color: #dadce0; }
+.lucky { color: #1a73e8; font-size: 13px; cursor: pointer; }
+.widgets { display: flex; gap: 14px; justify-content: center; margin: 34px 0 10px; flex-wrap: wrap; }
+.widget { background: #fff; border: 1px solid #dfe1e5; border-radius: 12px; padding: 14px 22px; min-width: 160px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+.widget .wl { font-size: 12px; color: #70757a; }
+.widget .wv { font-size: 24px; font-weight: 400; margin: 4px 0; }
+.widget .ws { font-size: 12px; color: #70757a; }
+.discover { max-width: 680px; margin: 36px auto 60px; padding: 0 20px; }
+.discover h2 { font-size: 20px; font-weight: 400; margin-bottom: 16px; color: #202124; }
+.dcard { border: 1px solid #dfe1e5; border-radius: 12px; margin-bottom: 16px; overflow: hidden; cursor: pointer; background: #fff; }
+.dcard:hover { box-shadow: 0 2px 10px rgba(0,0,0,.1); }
+.dcard img { width: 100%; height: 220px; object-fit: cover; display: block; }
+.dcard-body { padding: 14px 16px; }
+.dcard-title { font-size: 17px; font-weight: 400; line-height: 1.4; margin-bottom: 6px; color: #202124; }
+.dcard-meta { font-size: 12px; color: #70757a; }
+
+/* ===== RESULTS PAGE ===== */
+.rheader { border-bottom: 1px solid #ebebeb; padding: 14px 0 0; position: sticky; top: 0; background: #fff; z-index: 10; }
+.rheader-top { display: flex; align-items: center; gap: 24px; padding: 0 24px; max-width: 1300px; }
+.logo-sm { font-size: 26px; font-weight: 400; letter-spacing: -1px; cursor: pointer; white-space: nowrap; }
+.rsearch { flex: 1; max-width: 650px; position: relative; }
+.rsearch input { width: 100%; padding: 12px 90px 12px 20px; font-size: 16px; border: 1px solid #dfe1e5; border-radius: 24px; outline: none; box-shadow: 0 2px 5px rgba(0,0,0,.08); }
+.rsearch input:focus { box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+.tabs { display: flex; gap: 4px; padding: 0 24px; max-width: 1300px; overflow-x: auto; margin-top: 6px; }
+.tabs button { background: none; border: none; padding: 12px 12px; cursor: pointer; font-size: 13px; color: #5f6368; border-bottom: 3px solid transparent; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
 .tabs button.active { color: #1a73e8; border-bottom-color: #1a73e8; }
-.result { margin-bottom: 28px; max-width: 600px; }
-.result-header { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
-.result-favicon { width: 20px; height: 20px; border-radius: 50%; background: #f1f3f4; display: flex; align-items: center; justify-content: center; font-size: 12px; object-fit: cover; }
-.result-url { font-size: 13px; color: #202124; }
-.result-display-url { font-size: 12px; color: #5f6368; }
-.result-title { font-size: 20px; color: #1a0dab; text-decoration: none; line-height: 1.3; display: block; margin: 4px 0; font-weight: 400; }
-.result-title:hover { text-decoration: underline; }
-.result-snippet { font-size: 14px; color: #4d5156; line-height: 1.58; }
-/* Knowledge panel with photo carousel */
-.knowledge-panel { background: #fff; border: 1px solid #dfe1e5; border-radius: 12px; padding: 0; margin-bottom: 24px; overflow: hidden; }
-.kp-photos { display: flex; gap: 4px; overflow-x: auto; padding: 0; scrollbar-width: thin; }
-.kp-photos img { height: 180px; min-width: 140px; object-fit: cover; cursor: pointer; flex-shrink: 0; }
-.kp-photos img:first-child { min-width: 220px; }
-.kp-body { padding: 20px; }
-.kp-body h3 { font-size: 24px; margin-bottom: 4px; }
-.kp-sub { font-size: 13px; color: #70757a; margin-bottom: 10px; }
-.kp-desc { font-size: 14px; color: #4d5156; line-height: 1.6; margin-bottom: 10px; }
-.kp-facts { margin-top: 12px; }
-.kp-facts div { padding: 8px 0; border-top: 1px solid #f0f0f0; font-size: 14px; }
-.kp-facts span { color: #70757a; }
-.kp-links { margin-top: 12px; display: flex; gap: 12px; flex-wrap: wrap; }
-.kp-links a { font-size: 13px; color: #1a73e8; text-decoration: none; border: 1px solid #dfe1e5; padding: 6px 14px; border-radius: 16px; }
-.results-header { font-size: 13px; color: #70757a; margin-bottom: 20px; }
+.tabs button:hover { color: #202124; }
+.rmain { max-width: 652px; margin: 0 0 0 24px; padding: 0 20px 0 0; }
+@media (min-width: 1100px) { .rmain { margin-left: 180px; } .rheader-top, .tabs { padding-left: 180px; max-width: none; } }
+.stats { color: #70757a; font-size: 13px; padding: 12px 0 18px; }
+
+/* Knowledge panel */
+.kp { border: 1px solid #dfe1e5; border-radius: 12px; margin-bottom: 26px; overflow: hidden; }
+.kp-photos { display: flex; overflow-x: auto; scrollbar-width: thin; }
+.kp-photos img { height: 170px; min-width: 130px; object-fit: cover; cursor: pointer; flex-shrink: 0; border-right: 2px solid #fff; }
+.kp-photos img:first-child { min-width: 200px; }
+.kp-body { padding: 18px 20px; }
+.kp-name { font-size: 26px; font-weight: 400; }
+.kp-sub { font-size: 13px; color: #70757a; margin: 2px 0 10px; }
+.kp-desc { font-size: 14px; line-height: 1.6; color: #4d5156; }
+.kp-desc a { color: #1a73e8; }
+.kp-facts { margin-top: 14px; }
+.kp-facts .fr { padding: 7px 0; font-size: 14px; }
+.kp-facts .fr span { color: #70757a; }
+.kp-tabs { display: flex; gap: 16px; border-bottom: 1px solid #ebebeb; margin: 14px 0 4px; }
+.kp-tabs button { background: none; border: none; font-size: 13px; color: #5f6368; padding: 8px 2px; cursor: pointer; border-bottom: 2px solid transparent; }
+.kp-tabs button.active { color: #1a73e8; border-bottom-color: #1a73e8; font-weight: 500; }
+.kp-links { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
+.kp-links a { font-size: 13px; color: #1a0dab; border: 1px solid #dfe1e5; padding: 7px 16px; border-radius: 18px; }
+.kp-links a:hover { background: #f8f9fa; }
+
+/* Web results */
+.wr { margin-bottom: 30px; }
+.wr-cite { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.wr-fav { width: 26px; height: 26px; border-radius: 50%; background: #f1f3f4; object-fit: cover; flex-shrink: 0; }
+.wr-urlblock { line-height: 1.35; }
+.wr-site { font-size: 14px; color: #202124; }
+.wr-url { font-size: 12px; color: #5f6368; }
+.wr-title { font-size: 20px; font-weight: 400; color: #1a0dab; line-height: 1.3; display: inline-block; margin: 2px 0 4px; cursor: pointer; }
+.wr-title:hover { text-decoration: underline; }
+.wr-snip { font-size: 14px; color: #4d5156; line-height: 1.58; }
+
+/* People also ask */
+.paa { margin: 10px 0 30px; }
+.paa h3 { font-size: 20px; font-weight: 400; margin-bottom: 12px; }
+.paa-item { border-top: 1px solid #ebebeb; }
+.paa-item:last-child { border-bottom: 1px solid #ebebeb; }
+.paa-q { width: 100%; background: none; border: none; text-align: left; font-size: 16px; padding: 14px 4px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: #202124; }
+.paa-q:hover { color: #1a0dab; }
+.paa-a { font-size: 14px; color: #4d5156; line-height: 1.6; padding: 0 4px 16px; display: none; }
+.paa-a.show { display: block; }
+.paa-a .src { font-size: 12px; color: #1a73e8; margin-top: 8px; display: block; }
+
+/* Pagination */
+.pg { display: flex; align-items: center; justify-content: center; gap: 4px; margin: 36px 0 50px; flex-wrap: wrap; }
+.pg button { min-width: 36px; height: 36px; border: none; background: none; font-size: 14px; color: #1a73e8; cursor: pointer; border-radius: 50%; }
+.pg button:hover { background: #f1f3f4; }
+.pg button.cur { color: #202124; font-weight: 700; cursor: default; }
+.pg button.cur:hover { background: none; }
+.pg .nxt { border-radius: 18px; padding: 0 14px; }
+
 /* Image grid */
-.img-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; padding: 0 16px; max-width: 900px; margin: 0 auto; }
+.img-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 6px; padding: 6px 24px 40px; max-width: 1200px; }
 .img-item { border-radius: 8px; overflow: hidden; cursor: pointer; aspect-ratio: 1; background: #f1f3f4; }
 .img-item img { width: 100%; height: 100%; object-fit: cover; }
-.img-item img:hover { opacity: 0.9; }
-/* Video cards */
-.video-card { display: flex; gap: 12px; margin-bottom: 20px; cursor: pointer; }
-.video-thumb { width: 180px; height: 110px; border-radius: 8px; object-fit: cover; flex-shrink: 0; background: #f1f3f4; }
-.video-info { flex: 1; }
-.video-title { font-size: 16px; color: #1a0dab; margin-bottom: 4px; line-height: 1.3; }
-.video-meta { font-size: 12px; color: #70757a; }
+.img-item:hover img { transform: scale(1.03); transition: transform .2s; }
+
+/* Videos */
+.vcard { display: flex; gap: 14px; margin-bottom: 26px; cursor: pointer; }
+.vthumb { width: 200px; height: 115px; border-radius: 10px; object-fit: cover; flex-shrink: 0; background: #f1f3f4; }
+.vtitle { font-size: 17px; color: #1a0dab; margin-bottom: 5px; line-height: 1.35; font-weight: 400; }
+.vmeta { font-size: 12px; color: #70757a; margin-bottom: 6px; }
+.vsnip { font-size: 13px; color: #4d5156; line-height: 1.5; }
+
 /* AI Mode */
-.ai-answer-card { background: #f8f9fa; border-radius: 16px; padding: 24px; margin-bottom: 16px; line-height: 1.7; font-size: 15px; }
-.ai-answer-card h3 { margin-bottom: 14px; font-size: 18px; }
-.ai-answer-card strong { font-weight: 600; }
-.ai-answer-card sup.cite { background: #e8f0fe; color: #1a73e8; border-radius: 4px; padding: 1px 5px; font-size: 11px; margin: 0 2px; cursor: pointer; text-decoration: none; display: inline-block; }
-.ai-answer-card sup.cite a { color: #1a73e8; text-decoration: none; }
-.sources-section { margin-top: 8px; margin-bottom: 24px; }
-.sources-section h4 { font-size: 16px; margin-bottom: 12px; }
-.source-card { display: flex; gap: 12px; padding: 12px; border: 1px solid #dfe1e5; border-radius: 12px; margin-bottom: 10px; cursor: pointer; }
-.source-card:hover { background: #f8f9fa; }
-.source-num { background: #1a73e8; color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
-.source-title { font-size: 14px; color: #1a0dab; margin-bottom: 2px; }
-.source-domain { font-size: 12px; color: #5f6368; }
-.source-snippet { font-size: 13px; color: #4d5156; margin-top: 4px; line-height: 1.5; }
-.loading { text-align: center; padding: 40px; color: #70757a; }
-.error-box { text-align: center; padding: 40px 20px; color: #70757a; }
-.error-box p { margin-bottom: 12px; }
+.ai-card { background: #f0f4f9; border-radius: 18px; padding: 22px 24px; margin-bottom: 14px; font-size: 15px; line-height: 1.75; color: #1f1f1f; }
+.ai-card h3 { font-size: 17px; margin-bottom: 12px; font-weight: 500; }
+.ai-card p { margin-bottom: 10px; }
+.ai-card strong { font-weight: 600; }
+.ai-card sup.cite a { background: #d3e3fd; color: #0b57d0; border-radius: 6px; padding: 1px 6px; font-size: 11px; margin: 0 2px; font-weight: 500; }
+.ai-src-h { font-size: 18px; font-weight: 500; margin: 20px 0 12px; }
+.ai-src { display: flex; gap: 12px; padding: 12px; border: 1px solid #dfe1e5; border-radius: 12px; margin-bottom: 10px; cursor: pointer; }
+.ai-src:hover { background: #f8f9fa; }
+.ai-src-n { background: #0b57d0; color: #fff; min-width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; }
+.ai-src-t { font-size: 14px; color: #1a0dab; }
+.ai-src-d { font-size: 12px; color: #5f6368; margin-top: 2px; }
+.ai-src-s { font-size: 13px; color: #4d5156; margin-top: 5px; line-height: 1.5; }
+.ai-disc { font-size: 12px; color: #70757a; margin: 16px 0 30px; }
+
+/* Footer */
+.rfooter { background: #f2f2f2; border-top: 1px solid #e4e4e4; margin-top: 20px; }
+.rfooter .loc { padding: 14px 24px; font-size: 14px; color: #70757a; border-bottom: 1px solid #e4e4e4; }
+@media (min-width: 1100px) { .rfooter .loc, .rfooter .fl { padding-left: 180px; } }
+.rfooter .fl { padding: 12px 24px; display: flex; gap: 24px; flex-wrap: wrap; }
+.rfooter .fl a { font-size: 13px; color: #70757a; }
+.rfooter .fl a:hover { color: #202124; }
+
+.loading { text-align: center; padding: 50px; color: #70757a; }
+.errbox { text-align: center; padding: 50px 20px; color: #70757a; }
+.backhome { display: block; text-align: center; margin: 24px; color: #1a73e8; font-size: 14px; }
 </style>
 </head>
 <body>
+
+<!-- HOME -->
 <div id="home">
-  <div class="header">
-    <div class="logo"><span>B</span><span>h</span><span>a</span><span>r</span><span>a</span><span>t</span><span>K</span><span>h</span><span>o</span><span>j</span></div>
+  <div class="home-header">
+    <div class="logo-big"><span>B</span><span>h</span><span>a</span><span>r</span><span>a</span><span>t</span><span>K</span><span>h</span><span>o</span><span>j</span></div>
     <div class="tagline">India-first search. Private by design.</div>
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Search BharatKhoj" onkeypress="if(event.key==='Enter')doSearch()">
-      <button class="search-btn" onclick="doSearch()">🔍</button>
+    <div class="search-wrap">
+      <input type="text" id="searchInput" placeholder="" aria-label="Search" onkeypress="if(event.key==='Enter')doSearch()">
+      <div class="sicons"><button onclick="doSearch()" aria-label="Search">🔍</button></div>
     </div>
-    <div class="buttons">
+    <div class="home-btns">
       <button onclick="doSearch()">BharatKhoj Search</button>
       <button onclick="doAISearch()">AI Mode</button>
     </div>
-    <div style="margin-top:10px;"><a href="#" onclick="feelingLucky();return false;" style="color:#1a73e8;font-size:13px;">I'm Feeling Lucky</a></div>
+    <div><a class="lucky" onclick="feelingLucky();return false;" href="#">I'm Feeling Lucky</a></div>
   </div>
-  <div class="widgets" id="widgets"><div class="loading">Loading live data...</div></div>
+  <div class="widgets" id="widgets"></div>
   <div class="discover">
     <h2>Discover</h2>
-    <div id="discoverFeed"><div class="loading">Loading stories...</div></div>
+    <div id="discoverFeed"><div class="loading">Loading stories…</div></div>
   </div>
 </div>
 
+<!-- RESULTS -->
 <div id="results" style="display:none;">
-  <div class="header" style="padding:10px;">
-    <div style="display:flex;align-items:center;max-width:700px;margin:0 auto;gap:15px;">
-      <div class="logo" style="font-size:28px;margin:0;"><span>B</span><span>h</span><span>a</span><span>r</span><span>a</span><span>t</span><span>K</span><span>h</span><span>o</span><span>j</span></div>
-      <div class="search-box" style="flex:1;margin:0;">
+  <div class="rheader">
+    <div class="rheader-top">
+      <div class="logo-sm" onclick="goHome()"><span>B</span><span>h</span><span>a</span><span>r</span><span>a</span><span>t</span><span>K</span><span>h</span><span>o</span><span>j</span></div>
+      <div class="rsearch">
         <input type="text" id="searchInput2" onkeypress="if(event.key==='Enter')doSearch2()">
-        <button class="search-btn" onclick="doSearch2()">🔍</button>
+        <div class="sicons"><button onclick="doSearch2()">🔍</button></div>
       </div>
     </div>
+    <div class="tabs" id="tabs">
+      <button data-tab="ai" onclick="switchTab('ai')">✨ AI Mode</button>
+      <button data-tab="all" class="active" onclick="switchTab('all')">All</button>
+      <button data-tab="images" onclick="switchTab('images')">🖼️ Images</button>
+      <button data-tab="news" onclick="switchTab('news')">📰 News</button>
+      <button data-tab="videos" onclick="switchTab('videos')">▶️ Videos</button>
+    </div>
   </div>
-  <div class="tabs">
-    <button onclick="switchTab('ai')">AI Mode</button>
-    <button class="active" onclick="switchTab('all')">All</button>
-    <button onclick="switchTab('images')">Images</button>
-    <button onclick="switchTab('news')">News</button>
-    <button onclick="switchTab('videos')">Videos</button>
+  <div id="resultsBody"></div>
+  <div class="rfooter">
+    <div class="loc">📍 India</div>
+    <div class="fl"><a href="#">About</a><a href="#">How Search works</a><a href="#">Privacy</a><a href="#">Terms</a><a href="#" onclick="goHome();return false;">BharatKhoj Home</a></div>
   </div>
-  <div class="results" id="resultsList" style="max-width:900px;"></div>
-  <div style="text-align:center;margin:30px;"><a href="#" onclick="goHome();return false;" style="color:#1a73e8;">← Back to home</a></div>
 </div>
 
 <script>
-let currentQuery = '', currentTab = 'all', discoverPage = 1, loadingDiscover = false;
+let currentQuery = '', currentTab = 'all', currentPage = 1, discoverPage = 1, loadingDiscover = false;
 
-function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+const esc = s => (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
-// Render markdown: **bold** -> <strong>, [n] -> superscript citation link
-function renderMarkdown(text, sources) {
-  let html = esc(text);
-  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-  html = html.replace(/\*([^*]+?)\*/g, '<em>$1</em>');
-  html = html.replace(/\[(\d+)\]/g, (m, n) => {
-    const src = (sources||[]).find(s => String(s.n) === n);
-    const url = src ? src.url : '#';
-    return `<sup class="cite"><a href="${esc(url)}" target="_blank">${n}</a></sup>`;
+function renderMD(text, sources) {
+  let h = esc(text);
+  h = h.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  h = h.replace(/\[(\d+)\]/g, (m,n) => {
+    const s = (sources||[]).find(x => String(x.n)===n);
+    return `<sup class="cite"><a href="${esc(s?s.url:'#')}" target="_blank">${n}</a></sup>`;
   });
-  html = html.replace(/\n\n+/g, '</p><p>').replace(/\n/g, '<br>');
-  return '<p>' + html + '</p>';
+  return '<p>' + h.replace(/\n\n+/g,'</p><p>').replace(/\n/g,'<br>') + '</p>';
 }
 
+/* ---------- HOME ---------- */
 async function loadWidgets() {
   try {
     const r = await fetch('/.netlify/functions/discover?page=1');
     const d = await r.json();
-    let html = '';
-    if (d.weather) {
-      const w = d.weather;
-      html += `<div class="widget"><div class="label">🌤️ ${esc(w.location||'Delhi')}</div><div class="value">${w.temp_c}°C</div><div style="font-size:12px;color:#70757a">${esc(w.condition||'')} ${w.humidity ? '• 💧'+w.humidity+'%' : ''}</div></div>`;
-    }
-    if (d.total_news) html += `<div class="widget"><div class="label">📰 Fresh Stories</div><div class="value">${d.total_news}</div><div style="font-size:12px;color:#70757a">in Discover</div></div>`;
-    document.getElementById('widgets').innerHTML = html || '';
-  } catch(e) { document.getElementById('widgets').innerHTML = ''; }
+    let h = '';
+    if (d.weather) h += `<div class="widget"><div class="wl">🌤️ ${esc(d.weather.location||'Delhi')}</div><div class="wv">${d.weather.temp_c}°</div><div class="ws">${esc(d.weather.condition||'')}${d.weather.humidity?' • 💧'+d.weather.humidity+'%':''}</div></div>`;
+    if (d.total_news) h += `<div class="widget"><div class="wl">📰 Fresh stories</div><div class="wv">${d.total_news}</div><div class="ws">in Discover</div></div>`;
+    document.getElementById('widgets').innerHTML = h;
+  } catch(e) {}
 }
-
 async function loadDiscover() {
   if (loadingDiscover) return; loadingDiscover = true;
   try {
-    const r = await fetch(`/.netlify/functions/discover?page=${discoverPage}`);
+    const r = await fetch('/.netlify/functions/discover?page='+discoverPage);
     const d = await r.json();
     const feed = document.getElementById('discoverFeed');
-    if (discoverPage === 1) feed.innerHTML = '';
+    if (discoverPage===1) feed.innerHTML='';
     (d.news||[]).forEach(s => {
-      const img = s.image ? `<img src="${esc(s.image)}" loading="lazy" onerror="this.style.display='none'">` : '';
-      const time = s.published ? new Date(s.published).toLocaleString() : '';
-      feed.innerHTML += `<div class="card" onclick="window.open('${esc(s.url)}','_blank')">${img}<div class="card-body"><div class="card-title">${esc(s.title)}</div><div class="card-meta">${esc(s.source||'')} • ${time}</div></div><div class="card-actions"><button>👍 Like</button><button>↗️ Share</button></div></div>`;
+      feed.innerHTML += `<div class="dcard" onclick="window.open('${esc(s.url)}','_blank')">`
+        + (s.image?`<img src="${esc(s.image)}" loading="lazy" onerror="this.remove()">`:'')
+        + `<div class="dcard-body"><div class="dcard-title">${esc(s.title)}</div><div class="dcard-meta">${esc(s.source||'')} ${s.published?'• '+new Date(s.published).toLocaleDateString('en-IN'):''}</div></div></div>`;
     });
     discoverPage++;
-    loadingDiscover = !(d.has_more);
+    loadingDiscover = !d.has_more;
   } catch(e) {
-    if (discoverPage === 1) document.getElementById('discoverFeed').innerHTML = '<div class="error-box"><p>Stories load nahi ho payi.</p></div>';
+    if (discoverPage===1) document.getElementById('discoverFeed').innerHTML='<div class="errbox">Stories load nahi ho payi.</div>';
     loadingDiscover = true;
   }
 }
-
 window.onscroll = () => {
-  if (document.getElementById('home').style.display !== 'none' && !loadingDiscover) {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) loadDiscover();
-  }
+  if (document.getElementById('home').style.display!=='none' && !loadingDiscover)
+    if (innerHeight + scrollY >= document.body.offsetHeight - 600) loadDiscover();
 };
 
-function doSearch() { const q = document.getElementById('searchInput').value.trim(); if (q) showResults(q, 'all'); }
-function doSearch2() { const q = document.getElementById('searchInput2').value.trim(); if (q) showResults(q, currentTab); }
-function doAISearch() { const q = document.getElementById('searchInput').value.trim(); if (q) showResults(q, 'ai'); }
-function feelingLucky() { const q = document.getElementById('searchInput').value.trim() || 'India'; showResults(q, 'all'); }
-function goHome() { document.getElementById('results').style.display='none'; document.getElementById('home').style.display='block'; }
-function switchTab(t) {
-  currentTab = t;
-  document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
-  event.target.classList.add('active');
-  if(currentQuery) showResults(currentQuery, t);
+/* ---------- NAV ---------- */
+function doSearch(){ const q=document.getElementById('searchInput').value.trim(); if(q) showResults(q,'all',1); }
+function doSearch2(){ const q=document.getElementById('searchInput2').value.trim(); if(q) showResults(q,currentTab,1); }
+function doAISearch(){ const q=document.getElementById('searchInput').value.trim(); if(q) showResults(q,'ai',1); }
+function feelingLucky(){ const q=document.getElementById('searchInput').value.trim()||'India'; showResults(q,'all',1); }
+function goHome(){ document.getElementById('results').style.display='none'; document.getElementById('home').style.display='block'; window.scrollTo(0,0); }
+function switchTab(t){
+  currentTab=t;
+  document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('active', b.dataset.tab===t));
+  if(currentQuery) showResults(currentQuery,t,1);
 }
+function goPage(p){ showResults(currentQuery,currentTab,p); window.scrollTo(0,0); }
 
-// Knowledge panel with MULTIPLE photos (Google-like carousel)
-async function buildKnowledgePanel(q, kp) {
-  let photos = [];
-  if (kp.image) photos.push(kp.image);
+/* ---------- KNOWLEDGE PANEL ---------- */
+async function kpHTML(q, kp) {
+  let photos = kp.image?[kp.image]:[];
   try {
-    const r = await fetch(`/.netlify/functions/search?q=${encodeURIComponent(q)}&type=images&limit=6`);
+    const r = await fetch('/.netlify/functions/search?q='+encodeURIComponent(q)+'&type=images&limit=8');
     const d = await r.json();
-    (d.results||[]).forEach(im => {
-      const u = im.thumb_url || im.thumbnail || im.image_url;
-      if (u && !photos.includes(u)) photos.push(u);
-    });
-  } catch(e) {}
-  photos = photos.slice(0, 8);
-  let html = `<div class="knowledge-panel">`;
-  if (photos.length) {
-    html += `<div class="kp-photos">` + photos.map(p =>
-      `<img src="${esc(p)}" loading="lazy" onerror="this.style.display='none'" onclick="window.open('${esc(p)}','_blank')">`
-    ).join('') + `</div>`;
-  }
-  html += `<div class="kp-body"><h3>${esc(kp.name||q)}</h3>`;
-  if (kp.name_hi) html += `<div class="kp-sub">${esc(kp.name_hi)}</div>`;
-  if (kp.description) html += `<div class="kp-desc">${esc(kp.description.substring(0,400))}${kp.description.length>400?'...':''}</div>`;
-  if (kp.facts && kp.facts.length) {
-    html += `<div class="kp-facts">` + kp.facts.slice(0,6).map(f=>`<div><span>${esc(f.label)}:</span> <strong>${esc(f.value)}</strong></div>`).join('') + `</div>`;
-  }
-  html += `<div class="kp-links">`;
-  if (kp.wikipedia) html += `<a href="${esc(kp.wikipedia)}" target="_blank">📖 Wikipedia</a>`;
-  if (kp.official_website) html += `<a href="${esc(kp.official_website)}" target="_blank">🌐 Official site</a>`;
-  html += `</div></div></div>`;
-  return html;
+    (d.results||[]).forEach(im=>{ const u=im.thumb_url||im.thumbnail||im.image_url; if(u&&!photos.includes(u)) photos.push(u); });
+  } catch(e){}
+  photos = photos.slice(0,8);
+  return `<div class="kp">`
+    + (photos.length?`<div class="kp-photos">`+photos.map(p=>`<img src="${esc(p)}" loading="lazy" onerror="this.remove()" onclick="window.open('${esc(p)}','_blank')">`).join('')+`</div>`:'')
+    + `<div class="kp-body"><div class="kp-name">${esc(kp.name||q)}</div>`
+    + (kp.name_hi?`<div class="kp-sub">${esc(kp.name_hi)}</div>`:'')
+    + `<div class="kp-tabs"><button class="active">Overview</button><button onclick="switchTab('images')">Images</button><button onclick="switchTab('news')">News</button></div>`
+    + (kp.description?`<div class="kp-desc">${esc(kp.description.substring(0,500))}${kp.description.length>500?'…':''} ${kp.wikipedia?`<a href="${esc(kp.wikipedia)}" target="_blank">Wikipedia</a>`:''}</div>`:'')
+    + (kp.facts&&kp.facts.length?`<div class="kp-facts">`+kp.facts.slice(0,6).map(f=>`<div class="fr"><span>${esc(f.label)}: </span><strong>${esc(f.value)}</strong></div>`).join('')+`</div>`:'')
+    + `<div class="kp-links">${kp.wikipedia?`<a href="${esc(kp.wikipedia)}" target="_blank">📖 Wikipedia</a>`:''}${kp.official_website?`<a href="${esc(kp.official_website)}" target="_blank">🌐 Official site</a>`:''}</div>`
+    + `</div></div>`;
 }
 
-function webResultsHtml(d, q) {
-  let html = `<div class="results-header">About ${(d.total||(d.results||[]).length).toLocaleString()} results (${((d.took_ms||500)/1000).toFixed(2)} seconds)</div>`;
-  html += (d.results||[]).map(res => {
-    const favicon = res.favicon
-      ? `<img src="${esc(res.favicon)}" class="result-favicon" onerror="this.style.display='none'">`
-      : `<div class="result-favicon">🌐</div>`;
-    return `<div class="result">
-      <div class="result-header">${favicon}<div><div class="result-url">${esc(res.site_name||res.display_url||'')}</div><div class="result-display-url">${esc(res.display_url||res.url)}</div></div></div>
-      <a class="result-title" href="${esc(res.url)}" target="_blank">${esc(res.title)}</a>
-      <div class="result-snippet">${esc(res.snippet||'')}</div>
-    </div>`;
-  }).join('');
-  return html;
+/* ---------- PEOPLE ALSO ASK (AI-powered, real answers) ---------- */
+function paaHTML(q, kpName) {
+  const ent = kpName || q;
+  const qs = [
+    `${ent} kaun hai?`,
+    `${ent} ki age kitni hai?`,
+    `${ent} ke baare me latest news kya hai?`,
+    `${ent} ke career highlights kya hain?`
+  ];
+  return `<div class="paa"><h3>People also ask</h3>` + qs.map((x,i)=>
+    `<div class="paa-item"><button class="paa-q" onclick="togglePAA(${i},'${esc(x).replace(/'/g,"\\'")}')">${esc(x)}<span>⌄</span></button><div class="paa-a" id="paa-a-${i}"><div class="loading" style="padding:16px;">Loading…</div></div></div>`
+  ).join('') + `</div>`;
+}
+async function togglePAA(i, q) {
+  const el = document.getElementById('paa-a-'+i);
+  el.classList.toggle('show');
+  if (el.dataset.done) return;
+  el.dataset.done = 1;
+  try {
+    const r = await fetch('/.netlify/functions/ai?q='+encodeURIComponent(q));
+    const d = await r.json();
+    if (d.answer) {
+      const s0 = (d.sources||[])[0];
+      el.innerHTML = renderMD(d.answer.substring(0,600)+(d.answer.length>600?'…':''), d.sources)
+        + (s0?`<a class="src" href="${esc(s0.url)}" target="_blank">Source: ${esc(s0.domain||s0.url)}</a>`:'');
+    } else el.innerHTML = 'Jawab nahi mil paya.';
+  } catch(e){ el.innerHTML = 'Jawab nahi mil paya.'; }
 }
 
-async function showResults(q, tab) {
-  currentQuery = q; currentTab = tab;
+/* ---------- PAGINATION ---------- */
+function pgHTML(total, page, perPage) {
+  const pages = Math.min(10, Math.max(1, Math.ceil(total/perPage)));
+  if (pages<=1) return '';
+  let h = `<div class="pg">`;
+  for (let p=1;p<=pages;p++) h += `<button class="${p===page?'cur':''}" ${p===page?'':`onclick="goPage(${p})"`}>${p}</button>`;
+  if (page<pages) h += `<button class="nxt" onclick="goPage(${page+1})">Next ›</button>`;
+  return h+`</div>`;
+}
+
+/* ---------- MAIN RENDER ---------- */
+async function showResults(q, tab, page) {
+  currentQuery=q; currentTab=tab; currentPage=page||1;
   document.getElementById('home').style.display='none';
   document.getElementById('results').style.display='block';
-  document.getElementById('searchInput2').value = q;
-  const list = document.getElementById('resultsList');
-  list.innerHTML = '<div class="loading">Searching...</div>';
-  list.style.maxWidth = (tab==='images') ? '1000px' : '700px';
+  document.getElementById('searchInput2').value=q;
+  document.title = q + ' - BharatKhoj';
+  const body = document.getElementById('resultsBody');
+  body.innerHTML='<div class="loading">Searching…</div>';
+  window.scrollTo(0,0);
 
   try {
-    if (tab === 'ai') {
-      const r = await fetch(`/.netlify/functions/ai?q=${encodeURIComponent(q)}`);
+    if (tab==='ai') {
+      const r = await fetch('/.netlify/functions/ai?q='+encodeURIComponent(q));
       const d = await r.json();
-      if (d.error || !d.answer) {
-        list.innerHTML = `<div class="error-box"><p>😔 AI jawab nahi de paya.</p><p style="font-size:13px;">${esc(d.error||'Dobara try karein.')}</p></div>`;
-        return;
-      }
-      const sources = d.sources || d.citations || [];
-      let html = `<div class="ai-answer-card"><h3>🤖 AI Answer</h3>${renderMarkdown(d.answer, sources)}`;
-      if (d.took_ms) html += `<div style="font-size:12px;color:#70757a;margin-top:12px;">${(d.took_ms/1000).toFixed(1)}s • ${d.grounded ? 'Grounded' : ''}</div>`;
-      html += `</div>`;
-      if (sources.length) {
-        html += `<div class="sources-section"><h4>📚 Sources</h4>` + sources.map(s =>
-          `<div class="source-card" onclick="window.open('${esc(s.url)}','_blank')">
-            <div class="source-num">${s.n}</div>
-            <div><div class="source-title">${esc(s.title||s.url)}</div>
-            <div class="source-domain">${esc(s.domain||'')}</div>
-            ${s.snippet ? `<div class="source-snippet">${esc(s.snippet.substring(0,160))}...</div>` : ''}</div>
-          </div>`
-        ).join('') + `</div>`;
-      }
-      list.innerHTML = html;
-
-    } else if (tab === 'images') {
-      const r = await fetch(`/.netlify/functions/search?q=${encodeURIComponent(q)}&type=images&limit=30`);
-      const d = await r.json();
-      const imgs = d.results || [];
-      if (!imgs.length) { list.innerHTML = `<div class="error-box"><p>No images found for "${esc(q)}"</p></div>`; return; }
-      list.innerHTML = `<div class="results-header">About ${d.total||imgs.length} images</div><div class="img-grid">` +
-        imgs.map(im => {
-          const u = im.thumb_url || im.thumbnail || im.image_url;
-          return `<div class="img-item" title="${esc(im.title||'')}" onclick="window.open('${esc(im.image_url||u)}','_blank')"><img src="${esc(u)}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`;
-        }).join('') + `</div>`;
-
-    } else if (tab === 'videos') {
-      const r = await fetch(`/.netlify/functions/search?q=${encodeURIComponent(q)}&type=videos&limit=20`);
-      const d = await r.json();
-      const vids = d.results || [];
-      if (!vids.length) { list.innerHTML = `<div class="error-box"><p>No videos found for "${esc(q)}"</p></div>`; return; }
-      list.innerHTML = `<div class="results-header">About ${d.total||vids.length} videos</div>` +
-        vids.map(v => `<div class="video-card" onclick="window.open('${esc(v.video_url||v.url)}','_blank')">
-          ${v.thumbnail||v.thumb_url ? `<img class="video-thumb" src="${esc(v.thumbnail||v.thumb_url)}" loading="lazy" onerror="this.style.display='none'">` : ''}
-          <div class="video-info"><div class="video-title">${esc(v.title)}</div>
-          <div class="video-meta">${esc(v.source||v.display_url||'')} ${v.published ? '• '+esc(v.published) : ''}</div>
-          ${v.snippet ? `<div class="result-snippet" style="margin-top:6px;">${esc(v.snippet.substring(0,140))}...</div>` : ''}</div>
-        </div>`).join('');
-
-    } else if (tab === 'news') {
-      let items = [];
-      try {
-        const r = await fetch(`/.netlify/functions/search?q=${encodeURIComponent(q)}&type=news&limit=20`);
-        const d = await r.json();
-        if (!d.error) items = d.results || [];
-      } catch(e) {}
-      if (!items.length) {
-        // Fallback: Discover se matching news
-        try {
-          const r2 = await fetch(`/.netlify/functions/discover?page=1`);
-          const d2 = await r2.json();
-          const ql = q.toLowerCase();
-          items = (d2.news||[]).filter(n => (n.title||'').toLowerCase().includes(ql.split(' ')[0]));
-          if (!items.length) items = (d2.news||[]).slice(0, 10);
-          items = items.map(n => ({ title: n.title, url: n.url, display_url: n.source, snippet: '', image: n.image, published: n.published, source: n.source }));
-        } catch(e2) {}
-      }
-      if (!items.length) { list.innerHTML = `<div class="error-box"><p>No news found for "${esc(q)}"</p></div>`; return; }
-      list.innerHTML = `<div class="results-header">${items.length} news stories</div>` +
-        items.map(n => `<div class="result">
-          <div class="result-header"><div><div class="result-url">${esc(n.source||n.display_url||'')}</div><div class="result-display-url">${n.published ? esc(String(n.published).substring(0,10)) : ''}</div></div></div>
-          <a class="result-title" href="${esc(n.url)}" target="_blank">${esc(n.title)}</a>
-          ${n.snippet ? `<div class="result-snippet">${esc(n.snippet.substring(0,180))}...</div>` : ''}
-        </div>`).join('');
-
-    } else {
-      // ALL tab
-      const r = await fetch(`/.netlify/functions/search?q=${encodeURIComponent(q)}&limit=10`);
-      const d = await r.json();
-      if (!d.results || !d.results.length) { list.innerHTML = `<div class="error-box"><p>No results found for "${esc(q)}"</p></div>`; return; }
-      let html = '';
-      if (d.knowledge_panel) html += await buildKnowledgePanel(q, d.knowledge_panel);
-      html += webResultsHtml(d, q);
-      list.innerHTML = html;
+      if (d.error||!d.answer) { body.innerHTML=`<div class="rmain"><div class="errbox"><p>😔 AI jawab nahi de paya.</p><p style="font-size:13px">${esc(d.error||'Dobara try karein.')}</p></div></div>`; return; }
+      const srcs = d.sources||[];
+      body.innerHTML = `<div class="rmain"><div class="stats">AI Mode • ${srcs.length} sources</div>`
+        + `<div class="ai-card"><h3>✨ AI Answer</h3>${renderMD(d.answer, srcs)}</div>`
+        + (srcs.length?`<div class="ai-src-h">📚 Sources</div>`+srcs.map(s=>
+          `<div class="ai-src" onclick="window.open('${esc(s.url)}','_blank')"><div class="ai-src-n">${s.n}</div><div><div class="ai-src-t">${esc(s.title||s.url)}</div><div class="ai-src-d">${esc(s.domain||'')}</div>${s.snippet?`<div class="ai-src-s">${esc(s.snippet.substring(0,150))}…</div>`:''}</div></div>`).join(''):'')
+        + `<div class="ai-disc">AI responses may include mistakes. Verify important information.</div></div>`;
+      return;
     }
+
+    if (tab==='images') {
+      const r = await fetch(`/.netlify/functions/search?q=${encodeURIComponent(q)}&type=images&limit=40&page=${currentPage}`);
+      const d = await r.json();
+      const imgs = d.results||[];
+      body.innerHTML = imgs.length
+        ? `<div class="stats" style="padding-left:24px;">About ${(d.total||imgs.length).toLocaleString()} images</div><div class="img-grid">`
+          + imgs.map(im=>{ const u=im.thumb_url||im.thumbnail||im.image_url;
+            return `<div class="img-item" title="${esc(im.title||'')}" onclick="window.open('${esc(im.image_url||u)}','_blank')"><img src="${esc(u)}" loading="lazy" onerror="this.closest('.img-item').remove()"></div>`; }).join('')
+          + `</div>` + pgHTML(d.total||0, currentPage, 40)
+        : `<div class="rmain"><div class="errbox"><p>"${esc(q)}" ke liye koi image nahi mili.</p></div></div>`;
+      return;
+    }
+
+    if (tab==='videos') {
+      const r = await fetch(`/.netlify/functions/search?q=${encodeURIComponent(q)}&type=videos&limit=20&page=${currentPage}`);
+      const d = await r.json();
+      const vids = d.results||[];
+      body.innerHTML = `<div class="rmain"><div class="stats">About ${(d.total||vids.length).toLocaleString()} videos</div>`
+        + (vids.length? vids.map(v=>`<div class="vcard" onclick="window.open('${esc(v.video_url||v.url)}','_blank')">`
+          + ((v.thumbnail||v.thumb_url)?`<img class="vthumb" src="${esc(v.thumbnail||v.thumb_url)}" loading="lazy" onerror="this.remove()">`:'')
+          + `<div><div class="vtitle">${esc(v.title)}</div><div class="vmeta">${esc(v.source||v.display_url||'')}${v.published?' • '+esc(String(v.published).substring(0,10)):''}</div>${v.snippet?`<div class="vsnip">${esc(v.snippet.substring(0,140))}…</div>`:''}</div></div>`).join('')
+          : `<div class="errbox"><p>"${esc(q)}" ke liye koi video nahi mila.</p></div>`)
+        + pgHTML(d.total||0, currentPage, 20) + `</div>`;
+      return;
+    }
+
+    if (tab==='news') {
+      let items=[];
+      try { const r=await fetch(`/.netlify/functions/search?q=${encodeURIComponent(q)}&type=news&limit=20`); const d=await r.json(); if(!d.error) items=d.results||[]; } catch(e){}
+      if (!items.length) {
+        try { const r2=await fetch('/.netlify/functions/discover?page=1'); const d2=await r2.json();
+          const w=q.toLowerCase().split(' ')[0];
+          items=(d2.news||[]).filter(n=>(n.title||'').toLowerCase().includes(w));
+          if(!items.length) items=(d2.news||[]).slice(0,10);
+        } catch(e2){}
+      }
+      body.innerHTML = `<div class="rmain"><div class="stats">${items.length} news stories</div>`
+        + (items.length? items.map(n=>`<div class="wr"><div class="wr-cite"><div><div class="wr-site">${esc(n.source||n.display_url||'')}</div><div class="wr-url">${n.published?esc(String(n.published).substring(0,10)):''}</div></div></div><a class="wr-title" href="${esc(n.url)}" target="_blank">${esc(n.title)}</a>${n.snippet?`<div class="wr-snip">${esc(n.snippet.substring(0,180))}…</div>`:''}</div>`).join('')
+          : `<div class="errbox"><p>"${esc(q)}" ke liye koi news nahi mili.</p></div>`)
+        + `</div>`;
+      return;
+    }
+
+    // ALL
+    const r = await fetch(`/.netlify/functions/search?q=${encodeURIComponent(q)}&limit=10&page=${currentPage}`);
+    const d = await r.json();
+    if (!d.results||!d.results.length) { body.innerHTML=`<div class="rmain"><div class="errbox"><p>"${esc(q)}" ke liye koi result nahi mila.</p><p style="font-size:13px">Spelling check karein ya kuch aur try karein.</p></div></div>`; return; }
+    let h = `<div class="rmain"><div class="stats">About ${(d.total||d.results.length).toLocaleString()} results (${((d.took_ms||500)/1000).toFixed(2)} seconds)</div>`;
+    if (d.knowledge_panel && currentPage===1) h += await kpHTML(q, d.knowledge_panel);
+    h += d.results.map(res=>`<div class="wr"><div class="wr-cite">`
+      + (res.favicon?`<img class="wr-fav" src="${esc(res.favicon)}" onerror="this.remove()">`:`<div class="wr-fav" style="display:flex;align-items:center;justify-content:center;font-size:14px;">🌐</div>`)
+      + `<div><div class="wr-site">${esc(res.site_name||res.display_url||'')}</div><div class="wr-url">${esc(res.display_url||'')}</div></div></div>`
+      + `<a class="wr-title" href="${esc(res.url)}" target="_blank">${esc(res.title)}</a>`
+      + (res.snippet?`<div class="wr-snip">${esc(res.snippet)}</div>`:'') + `</div>`).join('');
+    if (currentPage===1) h += paaHTML(q, d.knowledge_panel?d.knowledge_panel.name:null);
+    h += pgHTML(d.total||0, currentPage, 10);
+    h += `</div>`;
+    body.innerHTML = h;
+
   } catch(e) {
-    list.innerHTML = `<div class="error-box"><p>Search failed. Dobara try karein.</p><p style="font-size:12px;">${esc(e.message)}</p></div>`;
+    body.innerHTML = `<div class="rmain"><div class="errbox"><p>Search failed. Dobara try karein.</p></div></div>`;
   }
 }
 
