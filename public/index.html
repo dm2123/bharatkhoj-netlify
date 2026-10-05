@@ -8,8 +8,6 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: Arial, sans-serif; background: #fff; color: #202124; font-size: 14px; }
 a { text-decoration: none; }
-
-/* ===== HOME ===== */
 .home-header { padding: 20px; text-align: center; }
 .logo-big { font-size: 52px; font-weight: 400; margin: 60px 0 8px; letter-spacing: -2px; }
 .logo-big span:nth-child(1), .logo-sm span:nth-child(1) { color: #4285F4; }
@@ -46,8 +44,6 @@ a { text-decoration: none; }
 .dcard-body { padding: 14px 16px; }
 .dcard-title { font-size: 17px; font-weight: 400; line-height: 1.4; margin-bottom: 6px; color: #202124; }
 .dcard-meta { font-size: 12px; color: #70757a; }
-
-/* ===== RESULTS PAGE ===== */
 .rheader { border-bottom: 1px solid #ebebeb; padding: 14px 0 0; position: sticky; top: 0; background: #fff; z-index: 10; }
 .rheader-top { display: flex; align-items: center; gap: 24px; padding: 0 24px; max-width: 1300px; }
 .logo-sm { font-size: 26px; font-weight: 400; letter-spacing: -1px; cursor: pointer; white-space: nowrap; }
@@ -61,28 +57,30 @@ a { text-decoration: none; }
 .rmain { max-width: 652px; margin: 0 0 0 24px; padding: 0 20px 0 0; }
 @media (min-width: 1100px) { .rmain { margin-left: 180px; } .rheader-top, .tabs { padding-left: 180px; max-width: none; } }
 .stats { color: #70757a; font-size: 13px; padding: 12px 0 18px; }
-
-/* Knowledge panel */
-.kp { border: 1px solid #dfe1e5; border-radius: 12px; margin-bottom: 26px; overflow: hidden; }
-.kp-photos { display: flex; overflow-x: auto; scrollbar-width: thin; }
-.kp-photos img { height: 170px; min-width: 130px; object-fit: cover; cursor: pointer; flex-shrink: 0; border-right: 2px solid #fff; }
-.kp-photos img:first-child { min-width: 200px; }
-.kp-body { padding: 18px 20px; }
-.kp-name { font-size: 26px; font-weight: 400; }
-.kp-sub { font-size: 13px; color: #70757a; margin: 2px 0 10px; }
-.kp-desc { font-size: 14px; line-height: 1.6; color: #4d5156; }
+.kp { border: 1px solid #dfe1e5; border-radius: 16px; margin-bottom: 28px; overflow: hidden; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+.kp-photos { display: flex; overflow-x: auto; scrollbar-width: none; position: relative; background: #f8f9fa; }
+.kp-photos::-webkit-scrollbar { display: none; }
+.kp-photos img { height: 200px; min-width: 150px; object-fit: cover; cursor: pointer; flex-shrink: 0; }
+.kp-photos img:first-child { min-width: 260px; }
+.kp-body { padding: 20px 22px 16px; }
+.kp-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.kp-name { font-size: 28px; font-weight: 400; line-height: 1.2; color: #202124; }
+.kp-share { background: none; border: none; cursor: pointer; font-size: 20px; color: #5f6368; padding: 4px; }
+.kp-share:hover { color: #202124; }
+.kp-sub { font-size: 14px; color: #70757a; margin: 4px 0 12px; }
+.kp-desc { font-size: 14px; line-height: 1.65; color: #4d5156; }
 .kp-desc a { color: #1a73e8; }
-.kp-facts { margin-top: 14px; }
-.kp-facts .fr { padding: 7px 0; font-size: 14px; }
-.kp-facts .fr span { color: #70757a; }
-.kp-tabs { display: flex; gap: 16px; border-bottom: 1px solid #ebebeb; margin: 14px 0 4px; }
-.kp-tabs button { background: none; border: none; font-size: 13px; color: #5f6368; padding: 8px 2px; cursor: pointer; border-bottom: 2px solid transparent; }
+.kp-facts { margin-top: 16px; border-top: 1px solid #f0f0f0; }
+.kp-facts .fr { padding: 10px 0; font-size: 14px; border-bottom: 1px solid #f0f0f0; display: flex; }
+.kp-facts .fr:last-child { border-bottom: none; }
+.kp-facts .fr span { color: #70757a; min-width: 110px; flex-shrink: 0; }
+.kp-facts .fr strong { font-weight: 400; color: #202124; }
+.kp-tabs { display: flex; gap: 20px; border-bottom: 1px solid #ebebeb; margin: 16px 0 6px; }
+.kp-tabs button { background: none; border: none; font-size: 14px; color: #5f6368; padding: 10px 2px; cursor: pointer; border-bottom: 3px solid transparent; }
 .kp-tabs button.active { color: #1a73e8; border-bottom-color: #1a73e8; font-weight: 500; }
-.kp-links { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
-.kp-links a { font-size: 13px; color: #1a0dab; border: 1px solid #dfe1e5; padding: 7px 16px; border-radius: 18px; }
-.kp-links a:hover { background: #f8f9fa; }
-
-/* Web results */
+.kp-links { margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap; }
+.kp-links a { font-size: 14px; color: #1a73e8; border: 1px solid #dfe1e5; padding: 8px 18px; border-radius: 20px; font-weight: 500; }
+.kp-links a:hover { background: #f6fafe; border-color: #1a73e8; }
 .wr { margin-bottom: 30px; }
 .wr-cite { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
 .wr-fav { width: 26px; height: 26px; border-radius: 50%; background: #f1f3f4; object-fit: cover; flex-shrink: 0; }
@@ -92,8 +90,6 @@ a { text-decoration: none; }
 .wr-title { font-size: 20px; font-weight: 400; color: #1a0dab; line-height: 1.3; display: inline-block; margin: 2px 0 4px; cursor: pointer; }
 .wr-title:hover { text-decoration: underline; }
 .wr-snip { font-size: 14px; color: #4d5156; line-height: 1.58; }
-
-/* People also ask */
 .paa { margin: 10px 0 30px; }
 .paa h3 { font-size: 20px; font-weight: 400; margin-bottom: 12px; }
 .paa-item { border-top: 1px solid #ebebeb; }
@@ -103,29 +99,21 @@ a { text-decoration: none; }
 .paa-a { font-size: 14px; color: #4d5156; line-height: 1.6; padding: 0 4px 16px; display: none; }
 .paa-a.show { display: block; }
 .paa-a .src { font-size: 12px; color: #1a73e8; margin-top: 8px; display: block; }
-
-/* Pagination */
 .pg { display: flex; align-items: center; justify-content: center; gap: 4px; margin: 36px 0 50px; flex-wrap: wrap; }
 .pg button { min-width: 36px; height: 36px; border: none; background: none; font-size: 14px; color: #1a73e8; cursor: pointer; border-radius: 50%; }
 .pg button:hover { background: #f1f3f4; }
 .pg button.cur { color: #202124; font-weight: 700; cursor: default; }
 .pg button.cur:hover { background: none; }
 .pg .nxt { border-radius: 18px; padding: 0 14px; }
-
-/* Image grid */
 .img-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 6px; padding: 6px 24px 40px; max-width: 1200px; }
 .img-item { border-radius: 8px; overflow: hidden; cursor: pointer; aspect-ratio: 1; background: #f1f3f4; }
 .img-item img { width: 100%; height: 100%; object-fit: cover; }
 .img-item:hover img { transform: scale(1.03); transition: transform .2s; }
-
-/* Videos */
 .vcard { display: flex; gap: 14px; margin-bottom: 26px; cursor: pointer; }
 .vthumb { width: 200px; height: 115px; border-radius: 10px; object-fit: cover; flex-shrink: 0; background: #f1f3f4; }
 .vtitle { font-size: 17px; color: #1a0dab; margin-bottom: 5px; line-height: 1.35; font-weight: 400; }
 .vmeta { font-size: 12px; color: #70757a; margin-bottom: 6px; }
 .vsnip { font-size: 13px; color: #4d5156; line-height: 1.5; }
-
-/* AI Mode */
 .ai-card { background: #f0f4f9; border-radius: 18px; padding: 22px 24px; margin-bottom: 14px; font-size: 15px; line-height: 1.75; color: #1f1f1f; }
 .ai-card h3 { font-size: 17px; margin-bottom: 12px; font-weight: 500; }
 .ai-card p { margin-bottom: 10px; }
@@ -139,23 +127,18 @@ a { text-decoration: none; }
 .ai-src-d { font-size: 12px; color: #5f6368; margin-top: 2px; }
 .ai-src-s { font-size: 13px; color: #4d5156; margin-top: 5px; line-height: 1.5; }
 .ai-disc { font-size: 12px; color: #70757a; margin: 16px 0 30px; }
-
-/* Footer */
 .rfooter { background: #f2f2f2; border-top: 1px solid #e4e4e4; margin-top: 20px; }
 .rfooter .loc { padding: 14px 24px; font-size: 14px; color: #70757a; border-bottom: 1px solid #e4e4e4; }
 @media (min-width: 1100px) { .rfooter .loc, .rfooter .fl { padding-left: 180px; } }
 .rfooter .fl { padding: 12px 24px; display: flex; gap: 24px; flex-wrap: wrap; }
 .rfooter .fl a { font-size: 13px; color: #70757a; }
 .rfooter .fl a:hover { color: #202124; }
-
 .loading { text-align: center; padding: 50px; color: #70757a; }
 .errbox { text-align: center; padding: 50px 20px; color: #70757a; }
 .backhome { display: block; text-align: center; margin: 24px; color: #1a73e8; font-size: 14px; }
 </style>
 </head>
 <body>
-
-<!-- HOME -->
 <div id="home">
   <div class="home-header">
     <div class="logo-big"><span>B</span><span>h</span><span>a</span><span>r</span><span>a</span><span>t</span><span>K</span><span>h</span><span>o</span><span>j</span></div>
@@ -176,8 +159,6 @@ a { text-decoration: none; }
     <div id="discoverFeed"><div class="loading">Loading stories…</div></div>
   </div>
 </div>
-
-<!-- RESULTS -->
 <div id="results" style="display:none;">
   <div class="rheader">
     <div class="rheader-top">
@@ -201,12 +182,9 @@ a { text-decoration: none; }
     <div class="fl"><a href="#">About</a><a href="#">How Search works</a><a href="#">Privacy</a><a href="#">Terms</a><a href="#" onclick="goHome();return false;">BharatKhoj Home</a></div>
   </div>
 </div>
-
 <script>
 let currentQuery = '', currentTab = 'all', currentPage = 1, discoverPage = 1, loadingDiscover = false;
-
 const esc = s => (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-
 function renderMD(text, sources) {
   let h = esc(text);
   h = h.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
@@ -216,8 +194,6 @@ function renderMD(text, sources) {
   });
   return '<p>' + h.replace(/\n\n+/g,'</p><p>').replace(/\n/g,'<br>') + '</p>';
 }
-
-/* ---------- HOME ---------- */
 async function loadWidgets() {
   try {
     const r = await fetch('/.netlify/functions/discover?page=1');
@@ -251,8 +227,6 @@ window.onscroll = () => {
   if (document.getElementById('home').style.display!=='none' && !loadingDiscover)
     if (innerHeight + scrollY >= document.body.offsetHeight - 600) loadDiscover();
 };
-
-/* ---------- NAV ---------- */
 function doSearch(){ const q=document.getElementById('searchInput').value.trim(); if(q) showResults(q,'all',1); }
 function doSearch2(){ const q=document.getElementById('searchInput2').value.trim(); if(q) showResults(q,currentTab,1); }
 function doAISearch(){ const q=document.getElementById('searchInput').value.trim(); if(q) showResults(q,'ai',1); }
@@ -264,8 +238,6 @@ function switchTab(t){
   if(currentQuery) showResults(currentQuery,t,1);
 }
 function goPage(p){ showResults(currentQuery,currentTab,p); window.scrollTo(0,0); }
-
-/* ---------- KNOWLEDGE PANEL ---------- */
 async function kpHTML(q, kp) {
   let photos = kp.image?[kp.image]:[];
   try {
@@ -274,26 +246,20 @@ async function kpHTML(q, kp) {
     (d.results||[]).forEach(im=>{ const u=im.thumb_url||im.thumbnail||im.image_url; if(u&&!photos.includes(u)) photos.push(u); });
   } catch(e){}
   photos = photos.slice(0,8);
+  const shareUrl = 'https://bharatkhoj-netlify.netlify.app/?q=' + encodeURIComponent(q);
   return `<div class="kp">`
     + (photos.length?`<div class="kp-photos">`+photos.map(p=>`<img src="${esc(p)}" loading="lazy" onerror="this.remove()" onclick="window.open('${esc(p)}','_blank')">`).join('')+`</div>`:'')
-    + `<div class="kp-body"><div class="kp-name">${esc(kp.name||q)}</div>`
+    + `<div class="kp-body"><div class="kp-top"><div class="kp-name">${esc(kp.name||q)}</div><button class="kp-share" onclick="navigator.share?navigator.share({title:'${esc(kp.name||q)}',url:'${shareUrl}'}):navigator.clipboard.writeText('${shareUrl}');alert('Link copied!')" title="Share">↗️</button></div>`
     + (kp.name_hi?`<div class="kp-sub">${esc(kp.name_hi)}</div>`:'')
     + `<div class="kp-tabs"><button class="active">Overview</button><button onclick="switchTab('images')">Images</button><button onclick="switchTab('news')">News</button></div>`
     + (kp.description?`<div class="kp-desc">${esc(kp.description.substring(0,500))}${kp.description.length>500?'…':''} ${kp.wikipedia?`<a href="${esc(kp.wikipedia)}" target="_blank">Wikipedia</a>`:''}</div>`:'')
-    + (kp.facts&&kp.facts.length?`<div class="kp-facts">`+kp.facts.slice(0,6).map(f=>`<div class="fr"><span>${esc(f.label)}: </span><strong>${esc(f.value)}</strong></div>`).join('')+`</div>`:'')
-    + `<div class="kp-links">${kp.wikipedia?`<a href="${esc(kp.wikipedia)}" target="_blank">📖 Wikipedia</a>`:''}${kp.official_website?`<a href="${esc(kp.official_website)}" target="_blank">🌐 Official site</a>`:''}</div>`
+    + (kp.facts&&kp.facts.length?`<div class="kp-facts">`+kp.facts.slice(0,8).map(f=>`<div class="fr"><span>${esc(f.label)}</span><strong>${esc(f.value)}</strong></div>`).join('')+`</div>`:'')
+    + `<div class="kp-links">${kp.wikipedia?`<a href="${esc(kp.wikipedia)}" target="_blank">Wikipedia</a>`:''}${kp.official_website?`<a href="${esc(kp.official_website)}" target="_blank">Official website</a>`:''}</div>`
     + `</div></div>`;
 }
-
-/* ---------- PEOPLE ALSO ASK (AI-powered, real answers) ---------- */
 function paaHTML(q, kpName) {
   const ent = kpName || q;
-  const qs = [
-    `${ent} kaun hai?`,
-    `${ent} ki age kitni hai?`,
-    `${ent} ke baare me latest news kya hai?`,
-    `${ent} ke career highlights kya hain?`
-  ];
+  const qs = [`${ent} kaun hai?`,`${ent} ki age kitni hai?`,`${ent} ke baare me latest news kya hai?`,`${ent} ke career highlights kya hain?`];
   return `<div class="paa"><h3>People also ask</h3>` + qs.map((x,i)=>
     `<div class="paa-item"><button class="paa-q" onclick="togglePAA(${i},'${esc(x).replace(/'/g,"\\'")}')">${esc(x)}<span>⌄</span></button><div class="paa-a" id="paa-a-${i}"><div class="loading" style="padding:16px;">Loading…</div></div></div>`
   ).join('') + `</div>`;
@@ -313,8 +279,6 @@ async function togglePAA(i, q) {
     } else el.innerHTML = 'Jawab nahi mil paya.';
   } catch(e){ el.innerHTML = 'Jawab nahi mil paya.'; }
 }
-
-/* ---------- PAGINATION ---------- */
 function pgHTML(total, page, perPage) {
   const pages = Math.min(10, Math.max(1, Math.ceil(total/perPage)));
   if (pages<=1) return '';
@@ -323,8 +287,6 @@ function pgHTML(total, page, perPage) {
   if (page<pages) h += `<button class="nxt" onclick="goPage(${page+1})">Next ›</button>`;
   return h+`</div>`;
 }
-
-/* ---------- MAIN RENDER ---------- */
 async function showResults(q, tab, page) {
   currentQuery=q; currentTab=tab; currentPage=page||1;
   document.getElementById('home').style.display='none';
@@ -334,7 +296,6 @@ async function showResults(q, tab, page) {
   const body = document.getElementById('resultsBody');
   body.innerHTML='<div class="loading">Searching…</div>';
   window.scrollTo(0,0);
-
   try {
     if (tab==='ai') {
       const r = await fetch('/.netlify/functions/ai?q='+encodeURIComponent(q));
@@ -348,7 +309,6 @@ async function showResults(q, tab, page) {
         + `<div class="ai-disc">AI responses may include mistakes. Verify important information.</div></div>`;
       return;
     }
-
     if (tab==='images') {
       const r = await fetch(`/.netlify/functions/search?q=${encodeURIComponent(q)}&type=images&limit=40&page=${currentPage}`);
       const d = await r.json();
@@ -361,7 +321,6 @@ async function showResults(q, tab, page) {
         : `<div class="rmain"><div class="errbox"><p>"${esc(q)}" ke liye koi image nahi mili.</p></div></div>`;
       return;
     }
-
     if (tab==='videos') {
       const r = await fetch(`/.netlify/functions/search?q=${encodeURIComponent(q)}&type=videos&limit=20&page=${currentPage}`);
       const d = await r.json();
@@ -374,7 +333,6 @@ async function showResults(q, tab, page) {
         + pgHTML(d.total||0, currentPage, 20) + `</div>`;
       return;
     }
-
     if (tab==='news') {
       let items=[];
       try { const r=await fetch(`/.netlify/functions/search?q=${encodeURIComponent(q)}&type=news&limit=20`); const d=await r.json(); if(!d.error) items=d.results||[]; } catch(e){}
@@ -391,8 +349,6 @@ async function showResults(q, tab, page) {
         + `</div>`;
       return;
     }
-
-    // ALL
     const r = await fetch(`/.netlify/functions/search?q=${encodeURIComponent(q)}&limit=10&page=${currentPage}`);
     const d = await r.json();
     if (!d.results||!d.results.length) { body.innerHTML=`<div class="rmain"><div class="errbox"><p>"${esc(q)}" ke liye koi result nahi mila.</p><p style="font-size:13px">Spelling check karein ya kuch aur try karein.</p></div></div>`; return; }
@@ -407,12 +363,10 @@ async function showResults(q, tab, page) {
     h += pgHTML(d.total||0, currentPage, 10);
     h += `</div>`;
     body.innerHTML = h;
-
   } catch(e) {
     body.innerHTML = `<div class="rmain"><div class="errbox"><p>Search failed. Dobara try karein.</p></div></div>`;
   }
 }
-
 loadWidgets(); loadDiscover();
 </script>
 </body>
