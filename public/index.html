@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BharatKhoj - India-first Search</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', Arial, sans-serif; background: #fff; color: #202124; }
+.header { padding: 20px; text-align: center; }
+.logo { font-size: 48px; font-weight: bold; margin: 40px 0 10px; }
+.logo span:nth-child(1) { color: #4285F4; } .logo span:nth-child(2) { color: #EA4335; }
+.logo span:nth-child(3) { color: #FBBC05; } .logo span:nth-child(4) { color: #4285F4; }
+.logo span:nth-child(5) { color: #34A853; } .logo span:nth-child(6) { color: #EA4335; }
+.logo span:nth-child(7) { color: #4285F4; } .logo span:nth-child(8) { color: #FBBC05; }
+.logo span:nth-child(9) { color: #34A853; } .logo span:nth-child(10) { color: #EA4335; }
+.tagline { color: #70757a; margin-bottom: 30px; font-size: 16px; }
+.search-box { max-width: 584px; margin: 0 auto; position: relative; }
+.search-box input { width: 100%; padding: 14px 50px 14px 20px; font-size: 16px; border: 1px solid #dfe1e5; border-radius: 24px; outline: none; }
+.search-box input:hover, .search-box input:focus { box-shadow: 0 1px 6px rgba(32,33,36,.28); border-color: transparent; }
+.search-btn { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 20px; }
+.buttons { margin: 25px 0; }
+.buttons button { background: #f8f9fa; border: 1px solid #f8f9fa; padding: 10px 20px; margin: 0 5px; border-radius: 4px; cursor: pointer; font-size: 14px; }
+.buttons button:hover { border-color: #dadce0; box-shadow: 0 1px 1px rgba(0,0,0,.1); }
+.widgets { display: flex; gap: 15px; justify-content: center; margin: 30px 0; flex-wrap: wrap; }
+.widget { background: #f8f9fa; border-radius: 12px; padding: 15px 20px; min-width: 150px; text-align: center; }
+.widget .label { font-size: 12px; color: #70757a; } .widget .value { font-size: 20px; font-weight: bold; margin-top: 5px; }
+.discover { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+.discover h2 { font-size: 22px; margin-bottom: 20px; }
+.card { background: #fff; border: 1px solid #dfe1e5; border-radius: 12px; margin-bottom: 20px; overflow: hidden; cursor: pointer; }
+.card:hover { box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+.card img { width: 100%; height: 250px; object-fit: cover; }
+.card-body { padding: 15px; }
+.card-title { font-size: 18px; font-weight: 500; margin-bottom: 8px; line-height: 1.4; }
+.card-meta { font-size: 13px; color: #70757a; }
+.card-actions { display: flex; gap: 15px; padding: 10px 15px; border-top: 1px solid #f0f0f0; }
+.card-actions button { background: none; border: none; cursor: pointer; font-size: 14px; color: #70757a; }
+.results { max-width: 700px; margin: 20px auto; padding: 0 20px; }
+.tabs { display: flex; gap: 20px; border-bottom: 1px solid #dfe1e5; margin-bottom: 20px; padding: 0 20px; }
+.tabs button { background: none; border: none; padding: 12px 0; cursor: pointer; font-size: 14px; color: #70757a; border-bottom: 3px solid transparent; }
+.tabs button.active { color: #1a73e8; border-bottom-color: #1a73e8; }
+.result { margin-bottom: 28px; max-width: 600px; }
+.result-header { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.result-favicon { width: 20px; height: 20px; border-radius: 50%; background: #f1f3f4; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+.result-url { font-size: 13px; color: #202124; }
+.result-display-url { font-size: 12px; color: #5f6368; }
+.result-title { font-size: 20px; color: #1a0dab; text-decoration: none; line-height: 1.3; display: block; margin: 4px 0; font-weight: 400; }
+.result-title:hover { text-decoration: underline; }
+.result-snippet { font-size: 14px; color: #4d5156; line-height: 1.58; }
+.knowledge-panel { background: #fff; border: 1px solid #dfe1e5; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.knowledge-panel h3 { font-size: 22px; margin-bottom: 10px; }
+.knowledge-panel img { width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
+.knowledge-facts { margin-top: 15px; }
+.knowledge-facts div { padding: 8px 0; border-top: 1px solid #f0f0f0; font-size: 14px; }
+.knowledge-facts span { color: #70757a; }
+.results-header { font-size: 13px; color: #70757a; margin-bottom: 20px; }
+.pagination { display: flex; gap: 10px; justify-content: center; margin: 30px 0; }
+.pagination button { padding: 8px 16px; border: 1px solid #dfe1e5; background: #fff; border-radius: 4px; cursor: pointer; }
+.pagination button:hover { background: #f8f9fa; }
+.pagination button.active { background: #1a73e8; color: #fff; border-color: #1a73e8; }
+.ai-answer { background: #f8f9fa; border-radius: 12px; padding: 20px; margin-bottom: 20px; line-height: 1.6; }
+.loading { text-align: center; padding: 40px; color: #70757a; }
+</style>
+</head>
+<body>
+<div id="home">
+<div class="header">
+<div class="logo"><span>B</span><span>h</span><span>a</span><span>r</span><span>a</span><span>t</span><span>K</span><span>h</span><span>o</span><span>j</span></div>
+<div class="tagline">India-first search. Private by design.</div>
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="Search BharatKhoj" onkeypress="if(event.key==='Enter')doSearch()">
+<button class="search-btn" onclick="doSearch()">&#128269;</button>
+</div>
+<div class="buttons">
+<button onclick="doSearch()">BharatKhoj Search</button>
+<button onclick="doAISearch()">AI Mode</button>
+</div>
+<div style="margin-top:10px;"><a href="#" onclick="feelingLucky();return false;" style="color:#1a73e8;font-size:13px;">I'm Feeling Lucky</a></div>
+</div>
+<div class="widgets" id="widgets"><div class="loading">Loading live data...</div></div>
+<div class="discover">
+<h2>Discover</h2>
+<div id="discoverFeed"><div class="loading">Loading stories...</div></div>
+</div>
+</div>
+<div id="results" style="display:none;">
+<div class="header" style="padding:10px;">
+<div style="display:flex;align-items:center;max-width:700px;margin:0 auto;gap:15px;">
+<div class="logo" style="font-size:28px;margin:0;"><span>B</span><span>h</span><span>a</span><span>r</span><span>a</span><span>t</span><span>K</span><span>h</span><span>o</span><span>j</span></div>
+<div class="search-box" style="flex:1;margin:0;">
+<input type="text" id="searchInput2" onkeypress="if(event.key==='Enter')doSearch2()">
+<button class="search-btn" onclick="doSearch2()">&#128269;</button>
+</div>
+</div>
+</div>
+<div class="tabs">
+<button onclick="switchTab('ai')">AI Mode</button>
+<button class="active" onclick="switchTab('all')">All</button>
+<button onclick="switchTab('images')">Images</button>
+<button onclick="switchTab('news')">News</button>
+<button onclick="switchTab('videos')">Videos</button>
+<button onclick="switchTab('adult')" style="color:#c5221f;">&#128286; Adult</button>
+</div>
+<div class="results" id="resultsList"></div>
+<div style="text-align:center;margin:30px;"><a href="#" onclick="goHome();return false;" style="color:#1a73e8;">&larr; Back to home</a></div>
+</div>
+<script>
+let currentQuery = '', currentTab = 'all', discoverPage = 1, loadingDiscover = false, adultVerified = false;
+function verifyAdult() {
+if (adultVerified) return true;
+const age = confirm("\ud83d\udd1e ADULT CONTENT (18+)\n\nKya aap 18 saal ya usse zyada ke hain?\n\nOK = Haan, 18+ hoon\nCancel = Nahi");
+if (age) { adultVerified = true; return true; }
+return false;
+}
+async function loadWidgets() {
+try {
+const r = await fetch('/.netlify/functions/discover?page=1');
+const d = await r.json();
+let html = '';
+if (d.weather) html += '<div class="widget"><div class="label">Delhi Weather</div><div class="value">' + d.weather.temp + '&#176;C</div><div style="font-size:12px;color:#70757a">' + (d.weather.condition||'') + '</div></div>';
+document.getElementById('widgets').innerHTML = html || '<div style="color:#70757a">Live data loading...</div>';
+} catch(e) { document.getElementById('widgets').innerHTML = ''; }
+}
+async function loadDiscover() {
+if (loadingDiscover) return; loadingDiscover = true;
+try {
+const r = await fetch('/.netlify/functions/discover?page=' + discoverPage);
+const d = await r.json();
+const feed = document.getElementById('discoverFeed');
+if (discoverPage === 1) feed.innerHTML = '';
+(d.news||[]).forEach(s => {
+const img = s.image ? '<img src="' + s.image + '" loading="lazy" onerror="this.style.display=\'none\'">' : '';
+const time = s.published ? new Date(s.published).toLocaleString() : '';
+feed.innerHTML += '<div class="card" onclick="window.open(\'' + s.url + '\',\'_blank\')">' + img + '<div class="card-body"><div class="card-title">' + s.title + '</div><div class="card-meta">' + (s.source||'') + ' &bull; ' + time + '</div></div><div class="card-actions"><button>&#128077; Like</button><button>&#8599;&#65039; Share</button></div></div>';
+});
+discoverPage++;
+if (d.has_more) loadingDiscover = false;
+} catch(e) { document.getElementById('discoverFeed').innerHTML = '<div class="loading">Failed to load stories</div>'; }
+}
+window.onscroll = () => {
+if (document.getElementById('home').style.display !== 'none' && !loadingDiscover) {
+if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) loadDiscover();
+}
+};
+function doSearch() { const q = document.getElementById('searchInput').value.trim(); if (q) showResults(q, 'all'); }
+function doSearch2() { const q = document.getElementById('searchInput2').value.trim(); if (q) showResults(q, currentTab); }
+function doAISearch() { const q = document.getElementById('searchInput').value.trim(); if (q) showResults(q, 'ai'); }
+function feelingLucky() { const q = document.getElementById('searchInput').value.trim() || 'India'; showResults(q, 'all'); }
+function goHome() { document.getElementById('results').style.display='none'; document.getElementById('home').style.display='block'; }
+function switchTab(t) {
+if (t === 'adult' && !verifyAdult()) return;
+currentTab = t;
+document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
+event.target.classList.add('active');
+if(currentQuery) showResults(currentQuery, t);
+}
+async function showResults(q, tab) {
+currentQuery = q; currentTab = tab;
+document.getElementById('home').style.display='none';
+document.getElementById('results').style.display='block';
+document.getElementById('searchInput2').value = q;
+const list = document.getElementById('resultsList');
+list.innerHTML = '<div class="loading">Searching...</div>';
+try {
+if (tab === 'ai') {
+const r = await fetch('/.netlify/functions/ai?q=' + encodeURIComponent(q));
+const d = await r.json();
+let cites = '';
+if (d.citations && d.citations.length) {
+cites = '<div style="margin-top:15px;"><strong style="font-size:14px;">Sources:</strong><div style="margin-top:8px;">' +
+d.citations.map(c=>'<div style="margin:5px 0;"><a href="' + c.url + '" target="_blank" style="color:#1a73e8;font-size:13px;">' + (c.title||c.url) + '</a></div>').join('') + '</div></div>';
+}
+list.innerHTML = '<div class="ai-answer"><h3 style="margin-bottom:12px;">&#129302; AI Answer</h3><div style="line-height:1.7;">' + (d.answer||d.text||'No answer available') + '</div>' + cites + '</div>';
+} else if (tab === 'adult') {
+if (!adultVerified) { list.innerHTML = '<div class="loading">18+ verification required</div>'; return; }
+const r = await fetch('/.netlify/functions/adult-search?q=' + encodeURIComponent(q) + '&limit=10');
+const d = await r.json();
+if (!d.results || d.results.length === 0) { list.innerHTML = '<div class="loading">No adult results found</div>'; return; }
+list.innerHTML = '<div class="results-header" style="color:#c5221f;">&#128286; Adult results for "' + q + '"</div>' +
+d.results.map(res => '<div class="result"><div class="result-url">' + (res.display_url||res.url) + '</div><a class="result-title" href="' + res.url + '" target="_blank">' + res.title + '</a><div class="result-snippet">' + (res.snippet||'') + '</div></div>').join('');
+} else {
+const r = await fetch('/.netlify/functions/search?q=' + encodeURIComponent(q) + '&limit=10');
+const d = await r.json();
+if (!d.results || d.results.length === 0) { list.innerHTML = '<div class="loading">No results found</div>'; return; }
+let html = '<div class="results-header">About ' + (d.total||d.results.length).toLocaleString() + ' results (' + (((d.took_ms||500)/1000).toFixed(2)) + ' seconds)</div>';
+if (d.knowledge_panel) {
+const kp = d.knowledge_panel;
+html += '<div class="knowledge-panel">';
+if (kp.image) html += '<img src="' + kp.image + '" alt="' + kp.name + '">';
+html += '<h3>' + (kp.name||'') + '</h3>';
+if (kp.description) html += '<p style="font-size:14px;color:#4d5156;line-height:1.6;">' + kp.description.substring(0,300) + '...</p>';
+if (kp.facts && kp.facts.length) {
+html += '<div class="knowledge-facts">' + kp.facts.slice(0,5).map(f=>'<div><span>' + f.label + ':</span> <strong>' + f.value + '</strong></div>').join('') + '</div>';
+}
+html += '</div>';
+}
+html += d.results.map(res => {
+const favicon = res.favicon ? '<img src="' + res.favicon + '" class="result-favicon" onerror="this.style.display=\'none\'">' : '<div class="result-favicon">&#127760;</div>';
+return '<div class="result"><div class="result-header">' + favicon + '<div><div class="result-url">' + (res.site_name||res.display_url||'') + '</div><div class="result-display-url">' + (res.display_url||res.url) + '</div></div></div><a class="result-title" href="' + res.url + '" target="_blank">' + res.title + '</a><div class="result-snippet">' + (res.snippet||'') + '</div></div>';
+}).join('');
+list.innerHTML = html;
+}
+} catch(e) { list.innerHTML = '<div class="loading">Search failed. Try again.</div>'; }
+}
+loadWidgets(); loadDiscover();
+</script>
+</body>
+</html>
