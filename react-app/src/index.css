@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: #202124;
+  color: #e8eaed;
+  font-family: Arial, Roboto, sans-serif;
+}
+
+/* Thin scrollbars for tab rails */
+*::-webkit-scrollbar {
+  height: 4px;
+  width: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: #5f6368;
+  border-radius: 4px;
+}
