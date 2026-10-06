@@ -412,12 +412,15 @@ function filterTime(f){ document.getElementById('stoolsMenu').classList.remove('
 /* ---------- KNOWLEDGE PANEL ---------- */
 async function kpHTML(q, kp) {
   // Photos: backend image + images-tab fetch (sirf real photos)
+  // images_locked (owner panel jaise): random image-search photos KABHI mat jodo
   let photos = kp.image?[kp.image]:[];
-  try {
-    const r = await fetch('/.netlify/functions/search?q='+encodeURIComponent(q)+'&type=images&limit=8');
-    const d = await r.json();
-    (d.results||[]).forEach(im=>{ const u=im.thumb_url||im.thumbnail||im.image_url; if(u&&!photos.includes(u)) photos.push(u); });
-  } catch(e){}
+  if (!kp.images_locked) {
+    try {
+      const r = await fetch('/.netlify/functions/search?q='+encodeURIComponent(q)+'&type=images&limit=8');
+      const d = await r.json();
+      (d.results||[]).forEach(im=>{ const u=im.thumb_url||im.thumbnail||im.image_url; if(u&&!photos.includes(u)) photos.push(u); });
+    } catch(e){}
+  }
   photos = photos.slice(0,6);
   const shareUrl = 'https://bharatkhoj-netlify.netlify.app/?q=' + encodeURIComponent(q);
 
