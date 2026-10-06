@@ -1,5 +1,5 @@
 // Netlify serverless function: Discover proxy with dual-backend fallback
-const PHONE = 'https://recipient-void-grill-staff.trycloudflare.com';
+const PHONE = 'https://driver-veteran-vinyl-scripts.trycloudflare.com';
 const RENDER = 'https://bharatkhoj-backend.onrender.com';
 
 async function tryFetch(url, timeoutMs = 25000) {
