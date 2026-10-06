@@ -217,6 +217,31 @@ a { text-decoration: none; }
 .loading { text-align: center; padding: 50px; color: #70757a; }
 .errbox { text-align: center; padding: 50px 20px; color: #70757a; }
 .backhome { display: block; text-align: center; margin: 24px; color: #1a73e8; font-size: 14px; }
+
+/* ===== LIVE DATA (better than Google) ===== */
+.live-sec { max-width: 680px; margin: 28px auto 0; padding: 0 20px; }
+.live-sec h2 { font-size: 20px; font-weight: 400; margin-bottom: 12px; color: #202124; }
+.trend-list { list-style: none; }
+.trend-item { display: flex; align-items: center; gap: 12px; padding: 11px 4px; border-bottom: 1px solid #f1f3f4; cursor: pointer; }
+.trend-item:hover { background: #f8f9fa; }
+.trend-item:last-child { border-bottom: none; }
+.trend-rank { color: #9aa0a6; font-size: 13px; min-width: 20px; }
+.trend-icon { font-size: 16px; }
+.trend-title { font-size: 15px; color: #202124; flex: 1; line-height: 1.4; }
+.trend-src { font-size: 12px; color: #70757a; white-space: nowrap; }
+.stock-up { color: #137333; }
+.stock-dn { color: #c5221f; }
+.widget .wv-small { font-size: 18px; font-weight: 400; margin: 4px 0; }
+.crick-item { padding: 10px 4px; border-bottom: 1px solid #f1f3f4; cursor: pointer; }
+.crick-item:hover { background: #f8f9fa; }
+.crick-item:last-child { border-bottom: none; }
+.crick-title { font-size: 14px; color: #202124; line-height: 1.4; }
+.crick-src { font-size: 12px; color: #70757a; margin-top: 3px; }
+@media (max-width: 600px) {
+  .logo-big { font-size: 40px; }
+  .widget { min-width: 140px; padding: 12px 14px; }
+  .trend-src { display: none; }
+}
 </style>
 </head>
 <body>
@@ -237,6 +262,14 @@ a { text-decoration: none; }
     <div><a class="lucky" onclick="feelingLucky();return false;" href="#">I'm Feeling Lucky</a></div>
   </div>
   <div class="widgets" id="widgets"></div>
+  <div class="live-sec" id="trendSec" style="display:none;">
+    <h2>🔥 Trending Searches</h2>
+    <ul class="trend-list" id="trendList"></ul>
+  </div>
+  <div class="live-sec" id="crickSec" style="display:none;">
+    <h2>🏏 Cricket Headlines</h2>
+    <div id="crickList"></div>
+  </div>
   <div class="discover">
     <h2>Discover</h2>
     <div id="discoverFeed"><div class="loading">Loading stories…</div></div>
@@ -319,14 +352,54 @@ async function askFollowUp() {
 
 /* ---------- HOME ---------- */
 async function loadWidgets() {
+  // Fresh stories count (discover se)
   try {
-    const r = await fetch('/.netlify/functions/discover?page=1');
-    const d = await r.json();
-    let h = '';
-    if (d.weather) h += `<div class="widget"><div class="wl">🌤️ ${esc(d.weather.location||'Delhi')}</div><div class="wv">${d.weather.temp_c}°</div><div class="ws">${esc(d.weather.condition||'')}${d.weather.humidity?' • 💧'+d.weather.humidity+'%':''}</div></div>`;
-    if (d.total_news) h += `<div class="widget"><div class="wl">📰 Fresh stories</div><div class="wv">${d.total_news}</div><div class="ws">in Discover</div></div>`;
-    document.getElementById('widgets').innerHTML = h;
+    const r0 = await fetch('/.netlify/functions/discover?page=1');
+    const d0 = await r0.json();
+    if (d0.total_news) document.getElementById('widgets').innerHTML =
+      `<div class="widget"><div class="wl">📰 Fresh stories</div><div class="wv">${d0.total_news}</div><div class="ws">in Discover</div></div>`;
   } catch(e) {}
+  // Live widgets: weather / gold / stocks / cricket / trending (real data)
+  try {
+    const r = await fetch('/.netlify/functions/widgets');
+    const d = await r.json();
+    let h = document.getElementById('widgets').innerHTML || '';
+    if (d.weather) h += `<div class="widget"><div class="wl">🌤️ ${esc(d.weather.location||'Delhi')}</div><div class="wv">${d.weather.temp_c}°</div><div class="ws">${esc(d.weather.condition||'')}${d.weather.humidity?' • 💧'+d.weather.humidity+'%':''}</div></div>`;
+    if (d.gold && d.gold.per_gram_inr) {
+      const chg = d.gold.change_percent;
+      const cls = chg == null ? '' : (chg >= 0 ? 'stock-up' : 'stock-dn');
+      const arrow = chg == null ? '' : (chg >= 0 ? '▲' : '▼');
+      h += `<div class="widget"><div class="wl">🪙 Gold / gram</div><div class="wv-small">₹${Number(d.gold.per_gram_inr).toLocaleString('en-IN')}</div><div class="ws ${cls}">${arrow}${chg==null?'':Math.abs(chg).toFixed(2)+'%'}</div></div>`;
+    }
+    (d.stocks||[]).slice(0,2).forEach(s => {
+      const up = (s.change_percent||0) >= 0;
+      h += `<div class="widget"><div class="wl">📈 ${esc(s.name)}</div><div class="wv-small">${Number(s.value).toLocaleString('en-IN')}</div><div class="ws ${up?'stock-up':'stock-dn'}">${up?'▲':'▼'} ${Math.abs(s.change_percent||0).toFixed(2)}%</div></div>`;
+    });
+    document.getElementById('widgets').innerHTML = h;
+    // 🔥 Trending searches — click karne par BharatKhoj me search
+    const tr = (d.trending||[]).slice(0,8);
+    if (tr.length) {
+      document.getElementById('trendSec').style.display = '';
+      document.getElementById('trendList').innerHTML = tr.map((t,i) =>
+        `<li class="trend-item" onclick="trendSearch(${i})"><span class="trend-rank">${i+1}</span><span class="trend-icon">📈</span><span class="trend-title">${esc(t.title)}</span><span class="trend-src">${esc(t.source||'')}</span></li>`
+      ).join('');
+      window._trending = tr;
+    }
+    // 🏏 Cricket headlines
+    const cr = (d.cricket||[]).slice(0,5);
+    if (cr.length) {
+      document.getElementById('crickSec').style.display = '';
+      document.getElementById('crickList').innerHTML = cr.map(c =>
+        `<div class="crick-item" onclick="window.open('${esc(c.url)}','_blank')"><div class="crick-title">${esc(c.title)}</div><div class="crick-src">${esc(c.source||'')}</div></div>`
+      ).join('');
+    }
+  } catch(e) {}
+}
+function trendSearch(i) {
+  const t = (window._trending||[])[i];
+  if (!t) return;
+  document.getElementById('searchInput').value = t.title;
+  doSearch();
 }
 async function loadDiscover() {
   if (loadingDiscover) return; loadingDiscover = true;
