@@ -427,6 +427,15 @@ a { text-decoration: none; }
 .ai-carousel { display: flex; gap: 8px; overflow-x: auto; padding: 2px 0 18px; scrollbar-width: none; }
 .ai-carousel::-webkit-scrollbar { display: none; }
 .ai-carousel img { height: 150px; width: auto; border-radius: 14px; flex-shrink: 0; cursor: pointer; object-fit: cover; background: #f1f3f4; }
+
+/* --- AI Overview (Google-jaisa, search results ke upar) --- */
+.aiov-card { background:#1f1f1f; border:1px solid #3c4043; border-radius:16px; padding:16px 18px; margin:0 0 18px; }
+.aiov-head { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+.aiov-spark { font-size:18px; }
+.aiov-title { font-size:15px; font-weight:600; color:#e8eaed; }
+.aiov-text { font-size:14.5px; line-height:1.65; color:#e8eaed; margin:0; }
+.aiov-toggle { background:none; border:none; color:#8ab4f8; font-size:13.5px; cursor:pointer; padding:8px 0 0; }
+.aiov-note { font-size:12.5px; color:#9aa0a6; margin:10px 0 0; line-height:1.5; }
 </style>
 </head>
 <body>
@@ -541,6 +550,16 @@ function aiAnswerHTML(q, answer, srcs) {
     + `<div class="ai-card">${renderMD(answer, srcs)}</div>`
     + (srcs.length?`<div class="ai-src-h" style="font-size:15px;">📚 Sources</div>`+srcs.slice(0,5).map(s=>
       `<div class="ai-src" onclick="window.open('${esc(s.url)}','_blank')"><div class="ai-src-n">${s.n}</div><div><div class="ai-src-t">${esc(s.title||s.url)}</div><div class="ai-src-d">${esc(s.domain||'')}</div></div></div>`).join(''):'')
+    + `</div>`;
+}
+/* --- AI Overview card (Google-jaisa): sirf jab backend show:true bheje --- */
+function aiOverviewHTML(ov) {
+  const id = 'aiov' + Math.random().toString(36).slice(2);
+  return `<div class="aiov-card" id="${id}">`
+    + `<div class="aiov-head"><span class="aiov-spark">\u2728</span><span class="aiov-title">AI Overview</span></div>`
+    + `<p class="aiov-text">${esc(ov.summary)}</p>`
+    + `<div class="aiov-more" style="display:none"><p class="aiov-note">Ye summary AI dwara taiyaar ki gayi hai \u2014 galti ho sakti hai. Zaroori jaankari verify karein.</p></div>`
+    + `<button class="aiov-toggle" onclick="(function(el){var m=el.parentElement.querySelector('.aiov-more');var open=m.style.display!=='none';m.style.display=open?'none':'block';el.textContent=open?'Show more':'Show less';})(this)">Show more</button>`
     + `</div>`;
 }
 async function askFollowUp() {
@@ -1080,6 +1099,14 @@ function videoRowHTML(v){
       + `<span class="stools"><button class="stools-btn" onclick="document.getElementById('stoolsMenu').classList.toggle('show')">🛠️ Tools</button><span class="stools-menu" id="stoolsMenu"><button onclick="filterTime('any')">Any time</button><button onclick="filterTime('day')">Past 24 hours</button><button onclick="filterTime('week')">Past week</button><button onclick="filterTime('month')">Past month</button></span></span></div>`;
     let kpHtml = '';
     if (d.knowledge_panel && currentPage===1) kpHtml = await kpHTML(q, d.knowledge_panel);
+    // AI Overview (Google-jaisa): sirf informational queries par, results ke sabse upar
+    if (currentPage===1) {
+      try {
+        const ovr = await fetch('/.netlify/functions/ai-overview?q='+encodeURIComponent(q));
+        const ovd = await ovr.json();
+        if (ovd && ovd.show && ovd.summary) h += aiOverviewHTML(ovd);
+      } catch(e){}
+    }
     // Desktop: panel right rail (.rside) | Mobile: panel column me upar — Google naap
     // Top Stories (news with images)
     if (currentPage===1) {
